@@ -20,6 +20,7 @@ target_compile_options(gm3d INTERFACE ${Gm3d_WARNING_OPTIONS} "-stdlib=libc++")
 enable_testing()
 
 set(Gm3d_TEST_SRC_FILES
+"${PROJECT_SOURCE_DIR}/test/vector2.cpp"
 "${PROJECT_SOURCE_DIR}/test/vector3.cpp"
 )
 
