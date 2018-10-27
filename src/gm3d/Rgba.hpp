@@ -11,7 +11,6 @@ class Rgba;
 
 template<>
 class Rgba<std::uint8_t> {
-
   std::uint8_t r_, g_, b_, a_;
 
 public:
@@ -27,7 +26,10 @@ public:
   {
   }
 
-  Rgba(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a = 0xFF) noexcept
+  Rgba(std::uint8_t r,
+       std::uint8_t g,
+       std::uint8_t b,
+       std::uint8_t a = 0xFF) noexcept
   : r_{r}
   , g_{g}
   , b_{b}
@@ -81,6 +83,19 @@ public:
   a() const noexcept
   {
     return a_;
+  }
+
+  friend bool
+  operator==(const Rgba& lhs, const Rgba& rhs) noexcept
+  {
+    return lhs.r() == rhs.r() && lhs.g() == rhs.g() && lhs.b() == rhs.b() &&
+           lhs.a() == rhs.a();
+  }
+
+  friend bool
+  operator!=(const Rgba& lhs, const Rgba& rhs) noexcept
+  {
+    return !(lhs == rhs);
   }
 };
 

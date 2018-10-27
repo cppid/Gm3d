@@ -46,3 +46,19 @@ TEST_CASE("rgba_uint8 initialization")
     REQUIRE(col.a() == 21);
   }
 }
+
+TEST_CASE("rgba_uint8 equality comparable")
+{
+  auto cola = Rgba8{0xFF, 0x7F, 0x50, 0x00};
+  auto colb = Rgba8{0xFF, 0x7F, 0x50, 0x00};
+  auto colc = Rgba8{0xFF, 0x7F, 0x50, 0x00};
+  auto cold = Rgba8{0, 0, 0, 0};
+
+  REQUIRE(cola == cola);
+  REQUIRE(cola == colb);
+  REQUIRE(colb == cola);
+  REQUIRE(colb == colc);
+  REQUIRE(cola == colc);
+
+  REQUIRE(cola != cold);
+}
