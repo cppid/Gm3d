@@ -27,7 +27,7 @@ public:
 
   template<typename U, typename = std::enable_if_t<std::is_convertible_v<U, T>>>
   explicit Vec3(Vec3<U> v) noexcept
-  : Vec3(v.x_, v.y_, v.z_)
+  : Vec3(v.x(), v.y(), v.z())
   {
   }
 

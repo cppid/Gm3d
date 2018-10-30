@@ -6,7 +6,8 @@
 
 #include <gm3d/Vec2.hpp>
 
-using Vec2f = gm3d::Vec2<float>;
+using gm3d::Vec2;
+using Vec2f = Vec2<float>;
 
 TEST_CASE("float_vector2_test traits")
 {
@@ -31,6 +32,11 @@ TEST_CASE("float_vector2_test initialization")
     auto vt = Vec2f{Vec2f{1.5, 2.3}};
     REQUIRE(vt.x() == 1.5f);
     REQUIRE(vt.y() == 2.3f);
+  }
+  {
+    auto vt = Vec2f{Vec2<int>{0}};
+    REQUIRE(vt.x() == 0.0f);
+    REQUIRE(vt.y() == 0.0f);
   }
 }
 

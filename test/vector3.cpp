@@ -6,7 +6,8 @@
 
 #include <gm3d/Vec3.hpp>
 
-using Vec3f = gm3d::Vec3<float>;
+using gm3d::Vec3;
+using Vec3f = Vec3<float>;
 
 TEST_CASE("float_vector3_test traits")
 {
@@ -34,6 +35,12 @@ TEST_CASE("float_vector3_test initialization")
     REQUIRE(vt.x() == 1.5f);
     REQUIRE(vt.y() == 2.3f);
     REQUIRE(vt.z() == 6.4f);
+  }
+  {
+    auto vt = Vec3f{Vec3<int>{0}};
+    REQUIRE(vt.x() == 0.0f);
+    REQUIRE(vt.y() == 0.0f);
+    REQUIRE(vt.z() == 0.0f);
   }
 }
 

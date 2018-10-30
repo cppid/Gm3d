@@ -26,7 +26,7 @@ public:
 
   template<typename U, typename = std::enable_if_t<std::is_convertible_v<U, T>>>
   explicit Vec2(Vec2<U> v) noexcept
-  : Vec2(v.x_, v.y_)
+  : Vec2(v.x(), v.y())
   {
   }
 
