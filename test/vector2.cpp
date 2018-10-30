@@ -38,6 +38,12 @@ TEST_CASE("float_vector2_test initialization")
     REQUIRE(vt.x() == 0.0f);
     REQUIRE(vt.y() == 0.0f);
   }
+  {
+    auto vt = Vec2f{0};
+    vt = Vec2<int>{0};
+    REQUIRE(vt.x() == 0.0f);
+    REQUIRE(vt.y() == 0.0f);
+  }
 }
 
 TEST_CASE("float_vector2_test comparison")

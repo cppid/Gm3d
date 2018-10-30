@@ -35,9 +35,9 @@ public:
   Vec3&
   operator=(const Vec3<U> rhs) noexcept
   {
-    x_ = rhs.x_;
-    y_ = rhs.y_;
-    z_ = rhs.z_;
+    x_ = rhs.x();
+    y_ = rhs.y();
+    z_ = rhs.z();
     return *this;
   }
 

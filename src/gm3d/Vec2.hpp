@@ -34,8 +34,8 @@ public:
   Vec2&
   operator=(const Vec2<U> rhs) noexcept
   {
-    x_ = rhs.x_;
-    y_ = rhs.y_;
+    x_ = rhs.x();
+    y_ = rhs.y();
     return *this;
   }
 
