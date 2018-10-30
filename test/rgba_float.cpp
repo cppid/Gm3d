@@ -61,6 +61,14 @@ TEST_CASE("rgba_uint8 initialization")
     REQUIRE(col.b() == Approx(0.388235));
     REQUIRE(col.a() == Approx(1.0));
   }
+  {
+    auto cu8 = Rgba8{45, 201, 99, 255};
+    auto col = Rgbaf{cu8};
+    REQUIRE(col.r() == Approx(0.176471));
+    REQUIRE(col.g() == Approx(0.788235));
+    REQUIRE(col.b() == Approx(0.388235));
+    REQUIRE(col.a() == Approx(1.0));
+  }
 }
 
 TEST_CASE("rgba_uint8 equality comparable")

@@ -38,7 +38,7 @@ public:
 
   template<typename T,
            typename = std::enable_if_t<std::is_same_v<T, std::uint8_t>>>
-  explicit Rgba(Rgba<T>&& col)
+  explicit Rgba(const Rgba<T>& col)
   : Rgba{col.r(), col.g(), col.b(), col.a()}
   {
   }
