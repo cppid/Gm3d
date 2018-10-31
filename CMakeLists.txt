@@ -20,6 +20,8 @@ target_compile_options(gm3d INTERFACE ${Gm3d_WARNING_OPTIONS} "-stdlib=libc++")
 enable_testing()
 
 set(Gm3d_TEST_SRC_FILES
+"${PROJECT_SOURCE_DIR}/test/matrix3.cpp"
+"${PROJECT_SOURCE_DIR}/test/matrix4.cpp"
 "${PROJECT_SOURCE_DIR}/test/rgba_float.cpp"
 "${PROJECT_SOURCE_DIR}/test/rgba_uint8.cpp"
 "${PROJECT_SOURCE_DIR}/test/vector2.cpp"
