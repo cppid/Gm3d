@@ -206,3 +206,14 @@ TEST_CASE("float_vector3_test division")
     REQUIRE(vt.z() == Approx(1.0f));
   }
 }
+
+TEST_CASE("float_vector3_test reflect")
+{
+  {
+    auto d = Vec3f{10, -2, 0};
+    auto r = d.reflect({0, 1, 0});
+    REQUIRE(r.x() == Approx(10.f));
+    REQUIRE(r.y() == Approx(2.0f));
+    REQUIRE(r.z() == Approx(0.0f));
+  }
+}

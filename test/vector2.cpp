@@ -178,3 +178,13 @@ TEST_CASE("float_vector2_test division")
     REQUIRE(vt.y() == Approx(4.0f));
   }
 }
+
+TEST_CASE("float_vector2_test reflect")
+{
+  {
+    auto d = Vec2f{10, -2};
+    auto r = d.reflect({0, 1});
+    REQUIRE(r.x() == Approx(10.f));
+    REQUIRE(r.y() == Approx(2.0f));
+  }
+}
