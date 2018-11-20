@@ -151,6 +151,12 @@ public:
     return *this / magnitude();
   }
 
+  Vec2
+  reflect(const Vec2& n) const noexcept
+  {
+    return *this - 2 * dot(n) * n;
+  }
+
   friend bool
   operator==(const Vec2& lhs, const Vec2& rhs) noexcept
   {

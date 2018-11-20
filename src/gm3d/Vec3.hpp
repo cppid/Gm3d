@@ -181,6 +181,12 @@ public:
             x_ * other.y_ - y_ * other.x_};
   }
 
+  Vec3
+  reflect(const Vec3& n) const noexcept
+  {
+    return *this - 2 * dot(n) * n;
+  }
+
   friend bool
   operator==(const Vec3& lhs, const Vec3& rhs) noexcept
   {
