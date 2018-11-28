@@ -49,6 +49,13 @@ TEST_CASE("float_vector3_test initialization")
     REQUIRE(vt.y() == 0.0f);
     REQUIRE(vt.z() == 0.0f);
   }
+  {
+    auto vd = Vec3<double>{0};
+    Vec3f vt = vd;
+    CHECK(vt.x() == 0.0f);
+    CHECK(vt.y() == 0.0f);
+    CHECK(vt.z() == 0.0f);
+  }
 }
 
 TEST_CASE("float_vector3_test comparison")
