@@ -24,8 +24,18 @@ public:
   {
   }
 
-  template<typename U, typename = std::enable_if_t<std::is_convertible_v<U, T>>>
+  template<typename U,
+           std::enable_if_t<std::is_constructible_v<T, U> &&
+                            !std::is_convertible_v<U, T>>* = nullptr>
   explicit Vec2(Vec2<U> v) noexcept
+  : Vec2(v.x(), v.y())
+  {
+  }
+
+  template<typename U,
+           std::enable_if_t<std::is_constructible_v<T, U> &&
+                            std::is_convertible_v<U, T>>* = nullptr>
+  Vec2(Vec2<U> v) noexcept
   : Vec2(v.x(), v.y())
   {
   }

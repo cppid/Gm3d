@@ -56,7 +56,32 @@ struct Mat4 {
   {
   }
 
-  template<typename U, typename = std::enable_if_t<std::is_convertible_v<U, T>>>
+  template<typename U,
+           std::enable_if_t<std::is_constructible_v<T, U> &&
+                            !std::is_convertible_v<U, T>>* = nullptr>
+  explicit Mat4(const Mat4<U>& m) noexcept
+  : Mat4(m.m[0],
+         m.m[1],
+         m.m[2],
+         m.m[3],
+         m.m[4],
+         m.m[5],
+         m.m[6],
+         m.m[7],
+         m.m[8],
+         m.m[9],
+         m.m[10],
+         m.m[11],
+         m.m[12],
+         m.m[13],
+         m.m[14],
+         m.m[15])
+  {
+  }
+
+  template<typename U,
+           std::enable_if_t<std::is_constructible_v<T, U> &&
+                            std::is_convertible_v<U, T>>* = nullptr>
   explicit Mat4(const Mat4<U>& m) noexcept
   : Mat4(m.m[0],
          m.m[1],
@@ -138,8 +163,7 @@ struct Mat4 {
     return *this;
   }
 
-  Mat4
-  operator*(T s) const noexcept
+  Mat4 operator*(T s) const noexcept
   {
     return Mat4{*this} *= s;
   }
