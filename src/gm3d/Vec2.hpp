@@ -7,10 +7,9 @@
 namespace gm3d {
 
 template<typename T>
-class Vec2 {
-  T x_, y_;
+struct Vec2 {
+  T elems[2];
 
-public:
   Vec2() noexcept = default;
 
   explicit Vec2(T s) noexcept
@@ -19,8 +18,7 @@ public:
   }
 
   Vec2(T x, T y) noexcept
-  : x_{x}
-  , y_{y}
+  : elems{x, y}
   {
   }
 
@@ -44,103 +42,103 @@ public:
   Vec2&
   operator=(const Vec2<U> rhs) noexcept
   {
-    x_ = rhs.x();
-    y_ = rhs.y();
+    elems[0] = rhs.x();
+    elems[1] = rhs.y();
     return *this;
   }
 
   Vec2&
   operator+=(const Vec2& rhs) noexcept
   {
-    x_ += rhs.x_;
-    y_ += rhs.y_;
+    elems[0] += rhs.elems[0];
+    elems[1] += rhs.elems[1];
     return *this;
   }
 
   Vec2&
   operator+=(T rhs) noexcept
   {
-    x_ += rhs;
-    y_ += rhs;
+    elems[0] += rhs;
+    elems[1] += rhs;
     return *this;
   }
 
   Vec2&
   operator-=(const Vec2& rhs) noexcept
   {
-    x_ -= rhs.x_;
-    y_ -= rhs.y_;
+    elems[0] -= rhs.elems[0];
+    elems[1] -= rhs.elems[1];
     return *this;
   }
 
   Vec2&
   operator-=(T rhs) noexcept
   {
-    x_ -= rhs;
-    y_ -= rhs;
+    elems[0] -= rhs;
+    elems[1] -= rhs;
     return *this;
   }
 
   Vec2&
   operator*=(const Vec2& rhs) noexcept
   {
-    x_ *= rhs.x_;
-    y_ *= rhs.y_;
+    elems[0] *= rhs.elems[0];
+    elems[1] *= rhs.elems[1];
     return *this;
   }
 
   Vec2&
   operator*=(T rhs) noexcept
   {
-    x_ *= rhs;
-    y_ *= rhs;
+    elems[0] *= rhs;
+    elems[1] *= rhs;
     return *this;
   }
 
   Vec2&
   operator/=(const Vec2& rhs) noexcept
   {
-    x_ /= rhs.x_;
-    y_ /= rhs.y_;
+    elems[0] /= rhs.elems[0];
+    elems[1] /= rhs.elems[1];
     return *this;
   }
 
   Vec2&
   operator/=(T rhs) noexcept
   {
-    x_ /= rhs;
-    y_ /= rhs;
+    elems[0] /= rhs;
+    elems[1] /= rhs;
     return *this;
   }
 
   void
   x(T val) noexcept
   {
-    x_ = val;
+    elems[0] = val;
   }
 
   void
   y(T val) noexcept
   {
-    y_ = val;
+    elems[1] = val;
   }
 
   T
   x() const noexcept
   {
-    return x_;
+    return elems[0];
   }
 
   T
   y() const noexcept
   {
-    return y_;
+    return elems[1];
   }
 
   T
   dot(const Vec2& other) const noexcept
   {
-    return x_ * other.x_ + y_ * other.y_;
+    return elems[0] * other.elems[0] + elems[1] * other.elems[1];
   }
 
   T
@@ -170,7 +168,7 @@ public:
   friend bool
   operator==(const Vec2& lhs, const Vec2& rhs) noexcept
   {
-    return lhs.x_ == rhs.x_ && lhs.y_ == rhs.y_;
+    return lhs.elems[0] == rhs.elems[0] && lhs.elems[1] == rhs.elems[1];
   }
 
   friend bool
@@ -188,7 +186,7 @@ public:
   friend Vec2
   operator+(const Vec2& lhs, const Vec2& rhs) noexcept
   {
-    return {lhs.x_ + rhs.x_, lhs.y_ + rhs.y_};
+    return {lhs.elems[0] + rhs.elems[0], lhs.elems[1] + rhs.elems[1]};
   }
 
   friend Vec2
@@ -206,13 +204,13 @@ public:
   friend Vec2
   operator-(const Vec2& lhs) noexcept
   {
-    return {-lhs.x_, -lhs.y_};
+    return {-lhs.elems[0], -lhs.elems[1]};
   }
 
   friend Vec2
   operator-(const Vec2& lhs, const Vec2& rhs) noexcept
   {
-    return {lhs.x_ - rhs.x_, lhs.y_ - rhs.y_};
+    return {lhs.elems[0] - rhs.elems[0], lhs.elems[1] - rhs.elems[1]};
   }
 
   friend Vec2
@@ -229,7 +227,7 @@ public:
 
   friend Vec2 operator*(const Vec2& lhs, const Vec2& rhs) noexcept
   {
-    return {lhs.x_ * rhs.x_, lhs.y_ * rhs.y_};
+    return {lhs.elems[0] * rhs.elems[0], lhs.elems[1] * rhs.elems[1]};
   }
 
   friend Vec2 operator*(const Vec2& lhs, T rhs) noexcept
@@ -245,7 +243,7 @@ public:
   friend Vec2
   operator/(const Vec2& lhs, const Vec2& rhs) noexcept
   {
-    return {lhs.x_ / rhs.x_, lhs.y_ / rhs.y_};
+    return {lhs.elems[0] / rhs.elems[0], lhs.elems[1] / rhs.elems[1]};
   }
 
   friend Vec2
