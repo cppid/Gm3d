@@ -46,7 +46,7 @@ TEST_CASE("float_vector2_test initialization")
   }
   {
     auto vd = Vec2<double>{0};
-    Vec2 vt = vd;
+    Vec2f vt = vd;
     CHECK(vt.x() == 0.0f);
     CHECK(vt.y() == 0.0f);
   }
