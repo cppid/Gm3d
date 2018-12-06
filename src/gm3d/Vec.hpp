@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstddef>
 #include <functional>
+#include <numeric>
 #include <type_traits>
 #include <utility>
 
@@ -281,7 +282,7 @@ struct Vec {
   friend Vec
   operator-(const Vec& lhs) noexcept
   {
-    return {-lhs.elems[0], -lhs.elems[1]};
+    return lhs.negate(std::make_index_sequence<N>());
   }
 
   friend Vec
@@ -348,6 +349,13 @@ private:
   is_equal(const U (&rhs)[N], std::index_sequence<Ns...>) const noexcept
   {
     return ((elems[Ns] == rhs[Ns]) && ... && true);
+  }
+
+  template<std::size_t... Ns>
+  Vec
+  negate(std::index_sequence<Ns...>) const noexcept
+  {
+    return Vec{(-elems[Ns])...};
   }
 };
 
