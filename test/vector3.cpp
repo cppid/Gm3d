@@ -80,9 +80,7 @@ TEST_CASE("float_vector3_test addition")
     auto vt = Vec3f{10.4, -2.2, 5.5};
     vt += 3.2;
     REQUIRE(vt.x() == Approx(13.6f));
-    ;
     REQUIRE(vt.y() == Approx(1.0f));
-    ;
     REQUIRE(vt.z() == Approx(8.7f));
     ;
   }
@@ -103,6 +101,12 @@ TEST_CASE("float_vector3_test addition")
     REQUIRE(vt.x() == Approx(-0.8f));
     REQUIRE(vt.y() == Approx(0.2f));
     REQUIRE(vt.z() == Approx(1.2f));
+  }
+  {
+    auto vt = Vec3<float>{0} + Vec3<double>{0};
+    CHECK(vt.x() == Approx(0.));
+    CHECK(vt.y() == Approx(0.));
+    CHECK(vt.z() == Approx(0.));
   }
 }
 
@@ -140,6 +144,12 @@ TEST_CASE("float_vector3_test subtraction")
     REQUIRE(vt.y() == Approx(1.3f));
     REQUIRE(vt.z() == Approx(-6.4f));
   }
+  {
+    auto vt = Vec3<float>{0} - Vec3<double>{0};
+    CHECK(vt.x() == Approx(0.));
+    CHECK(vt.y() == Approx(0.));
+    CHECK(vt.z() == Approx(0.));
+  }
 }
 
 TEST_CASE("float_vector3_test multiplication")
@@ -176,6 +186,12 @@ TEST_CASE("float_vector3_test multiplication")
     REQUIRE(vt.y() == Approx(-0.4f));
     REQUIRE(vt.z() == Approx(15.4f));
   }
+  {
+    auto vt = Vec3<float>{0} * Vec3<double>{0};
+    CHECK(vt.x() == Approx(0.));
+    CHECK(vt.y() == Approx(0.));
+    CHECK(vt.z() == Approx(0.));
+  }
 }
 
 TEST_CASE("float_vector3_test division")
@@ -211,6 +227,12 @@ TEST_CASE("float_vector3_test division")
     REQUIRE(vt.x() == Approx(-0.2f));
     REQUIRE(vt.y() == Approx(4.0f));
     REQUIRE(vt.z() == Approx(1.0f));
+  }
+  {
+    auto vt = Vec3<float>{0} / Vec3<double>{1};
+    CHECK(vt.x() == Approx(0.));
+    CHECK(vt.y() == Approx(0.));
+    CHECK(vt.z() == Approx(0.));
   }
 }
 
