@@ -89,20 +89,6 @@ struct Vec {
     return *this;
   }
 
-  template<typename U, typename P, std::size_t... Ns>
-  inline void
-  op_assign(const U (&rhs)[N], P op, std::index_sequence<Ns...>) noexcept
-  {
-    ((elems[Ns] = op(elems[Ns], rhs[Ns])), ...);
-  }
-
-  template<typename U, typename P, std::size_t... Ns>
-  inline void
-  op_assign(U rhs, P op, std::index_sequence<Ns...>) noexcept
-  {
-    ((elems[Ns] = op(elems[Ns], rhs)), ...);
-  }
-
   Vec&
   operator+=(T rhs) noexcept
   {
@@ -261,15 +247,17 @@ struct Vec {
     return val;
   }
 
-  friend Vec
-  operator+(const Vec& lhs, const Vec& rhs) noexcept
+  template<typename U,
+           typename = std::enable_if_t<std::is_invocable_v<std::plus<>, T, U>>>
+  friend Vec<std::invoke_result_t<std::plus<>, T, U>, N>
+  operator+(const Vec& lhs, const Vec<U, N>& rhs) noexcept
   {
-    return Vec{lhs} += rhs;
+    return invoke_op{}(std::plus{}, lhs, rhs, std::make_index_sequence<N>());
   }
 
   friend Vec
   operator+(const Vec& lhs, T rhs) noexcept
-  {
+  { 
     return lhs + Vec{rhs};
   }
 
@@ -282,13 +270,15 @@ struct Vec {
   friend Vec
   operator-(const Vec& lhs) noexcept
   {
-    return lhs.negate(std::make_index_sequence<N>());
+    return invoke_op{}(std::negate{}, lhs, std::make_index_sequence<N>());
   }
 
-  friend Vec
-  operator-(const Vec& lhs, const Vec& rhs) noexcept
+  template<typename U,
+           typename = std::enable_if_t<std::is_invocable_v<std::minus<>, T, U>>>
+  friend Vec<std::invoke_result_t<std::minus<>, T, U>, N>
+  operator-(const Vec& lhs, const Vec<U, N>& rhs) noexcept
   {
-    return Vec{lhs} -= rhs;
+    return invoke_op{}(std::minus{}, lhs, rhs, std::make_index_sequence<N>());
   }
 
   friend Vec
@@ -303,9 +293,12 @@ struct Vec {
     return Vec{lhs} - rhs;
   }
 
-  friend Vec operator*(const Vec& lhs, const Vec& rhs) noexcept
+  template<typename U,
+           typename = std::enable_if_t<std::is_invocable_v<std::multiplies<>, T, U>>>
+  friend Vec<std::invoke_result_t<std::multiplies<>, T, U>, N>
+  operator*(const Vec& lhs, const Vec<U, N>& rhs) noexcept
   {
-    return Vec{lhs} *= rhs;
+    return invoke_op{}(std::multiplies{}, lhs, rhs, std::make_index_sequence<N>());
   }
 
   friend Vec operator*(const Vec& lhs, T rhs) noexcept
@@ -317,11 +310,13 @@ struct Vec {
   {
     return Vec{lhs} * rhs;
   }
-
-  friend Vec
-  operator/(const Vec& lhs, const Vec& rhs) noexcept
+  
+  template<typename U,
+           typename = std::enable_if_t<std::is_invocable_v<std::divides<>, T, U>>>
+  friend Vec<std::invoke_result_t<std::divides<>, T, U>, N>
+  operator/(const Vec& lhs, const Vec<U, N>& rhs) noexcept
   {
-    return Vec{lhs} /= rhs;
+    return invoke_op{}(std::divides{}, lhs, rhs, std::make_index_sequence<N>());
   }
 
   friend Vec
@@ -337,6 +332,48 @@ struct Vec {
   }
 
 private:
+  struct invoke_op {
+    template<typename P,
+             typename U,
+             std::size_t... Ns>
+    Vec<std::invoke_result_t<P, U>, N>
+    operator()(const P op,
+               const Vec<U, N>& lhs,
+               std::index_sequence<Ns...>) const noexcept
+    {
+      static_assert(sizeof...(Ns) == N);
+      return {op(lhs.elems[Ns])...};
+    }
+
+    template<typename P,
+             typename U,
+             typename V,
+             std::size_t... Ns>
+    Vec<std::invoke_result_t<P, U, V>, N>
+    operator()(const P op,
+               const Vec<U, N>& lhs,
+               const Vec<V, N>& rhs,
+               std::index_sequence<Ns...>) const noexcept
+    {
+      static_assert(sizeof...(Ns) == N);
+      return {op(lhs.elems[Ns], rhs.elems[Ns])...};
+    }
+  };
+
+  template<typename U, typename P, std::size_t... Ns>
+  inline void
+  op_assign(const U (&rhs)[N], P op, std::index_sequence<Ns...>) noexcept
+  {
+    ((elems[Ns] = op(elems[Ns], rhs[Ns])), ...);
+  }
+
+  template<typename U, typename P, std::size_t... Ns>
+  inline void
+  op_assign(U rhs, P op, std::index_sequence<Ns...>) noexcept
+  {
+    ((elems[Ns] = op(elems[Ns], rhs)), ...);
+  }
+
   template<typename U, std::size_t... Ns>
   inline void
   op_assign(const U (&rhs)[N], std::index_sequence<Ns...>) noexcept
