@@ -205,7 +205,7 @@ struct Vec {
   T
   dot(const Vec& other) const noexcept
   {
-    return std::inner_product(elems, elems + N, other.elems, 0);
+    return dot(other, std::make_index_sequence<N>());
   }
 
   T
@@ -335,8 +335,9 @@ private:
   struct invoke_op {
     template<typename P,
              typename U,
-             std::size_t... Ns>
-    Vec<std::invoke_result_t<P, U>, N>
+             std::size_t... Ns,
+             typename R = std::invoke_result_t<P, U>>
+    Vec<R, N>
     operator()(const P op,
                const Vec<U, N>& lhs,
                std::index_sequence<Ns...>) const noexcept
@@ -348,8 +349,9 @@ private:
     template<typename P,
              typename U,
              typename V,
-             std::size_t... Ns>
-    Vec<std::invoke_result_t<P, U, V>, N>
+             std::size_t... Ns,
+             typename R = std::invoke_result_t<P, U, V>>
+    Vec<R, N>
     operator()(const P op,
                const Vec<U, N>& lhs,
                const Vec<V, N>& rhs,
@@ -393,6 +395,13 @@ private:
   negate(std::index_sequence<Ns...>) const noexcept
   {
     return Vec{(-elems[Ns])...};
+  }
+
+  template<std::size_t... Ns>
+  T
+  dot(const Vec& other, std::index_sequence<Ns...>) const noexcept
+  {
+    return ((elems[Ns] * other.elems[Ns]) + ... + 0);
   }
 };
 
