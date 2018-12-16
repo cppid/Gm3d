@@ -246,3 +246,12 @@ TEST_CASE("float_vector3_test reflect")
     REQUIRE(r.z() == Approx(0.0f));
   }
 }
+
+TEST_CASE("float_vector3_test to_unit")
+{
+  {
+    auto vt = Vec3f(-10.0, 0.5, 2) / 2;
+    auto n = vt.to_unit();
+    REQUIRE(n.magnitude() == Approx(1.0f));
+  }
+}
