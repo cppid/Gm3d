@@ -138,56 +138,56 @@ struct Mat3 {
     m[8] = val;
   }
 
-  T
-  m00() const noexcept
+  auto
+  m00() const noexcept -> T
   {
     return m[0];
   }
 
-  T
-  m01() const noexcept
+  auto
+  m01() const noexcept -> T
   {
     return m[1];
   }
 
-  T
-  m02() const noexcept
+  auto
+  m02() const noexcept -> T
   {
     return m[2];
   }
 
-  T
-  m10() const noexcept
+  auto
+  m10() const noexcept -> T
   {
     return m[3];
   }
 
-  T
-  m11() const noexcept
+  auto
+  m11() const noexcept -> T
   {
     return m[4];
   }
 
-  T
-  m12() const noexcept
+  auto
+  m12() const noexcept -> T
   {
     return m[5];
   }
 
-  T
-  m20() const noexcept
+  auto
+  m20() const noexcept -> T
   {
     return m[6];
   }
 
-  T
-  m21() const noexcept
+  auto
+  m21() const noexcept -> T
   {
     return m[7];
   }
 
-  T
-  m22() const noexcept
+  auto
+  m22() const noexcept -> T
   {
     return m[8];
   }
