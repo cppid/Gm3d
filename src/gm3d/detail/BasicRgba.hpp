@@ -52,39 +52,39 @@ public:
     a_ = val;
   }
 
-  Scalar
-  r() const noexcept
+  auto
+  r() const noexcept -> Scalar
   {
     return r_;
   }
 
-  Scalar
-  g() const noexcept
+  auto
+  g() const noexcept -> Scalar
   {
     return g_;
   }
 
-  Scalar
-  b() const noexcept
+  auto
+  b() const noexcept -> Scalar
   {
     return b_;
   }
 
-  Scalar
-  a() const noexcept
+  auto
+  a() const noexcept -> Scalar
   {
     return a_;
   }
 
-  friend bool
-  operator==(const BasicRgba& lhs, const BasicRgba& rhs) noexcept
+  friend auto
+  operator==(const BasicRgba& lhs, const BasicRgba& rhs) noexcept -> bool
   {
     return lhs.r() == rhs.r() && lhs.g() == rhs.g() && lhs.b() == rhs.b() &&
            lhs.a() == rhs.a();
   }
 
-  friend bool
-  operator!=(const BasicRgba& lhs, const BasicRgba& rhs) noexcept
+  friend auto
+  operator!=(const BasicRgba& lhs, const BasicRgba& rhs) noexcept -> bool
   {
     return !(lhs == rhs);
   }

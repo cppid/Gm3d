@@ -75,77 +75,77 @@ struct Vec {
   }
 
   template<typename U, typename = std::enable_if_t<std::is_convertible_v<U, T>>>
-  Vec&
-  operator=(const Vec<U, N> rhs) noexcept
+  auto
+  operator=(const Vec<U, N> rhs) noexcept -> Vec&
   {
     op_assign(rhs.elems, std::make_index_sequence<N>());
     return *this;
   }
 
-  Vec&
-  operator+=(const Vec& rhs) noexcept
+  auto
+  operator+=(const Vec& rhs) noexcept -> Vec&
   {
     op_assign(rhs.elems, std::plus{}, std::make_index_sequence<N>());
     return *this;
   }
 
-  Vec&
-  operator+=(T rhs) noexcept
+  auto
+  operator+=(T rhs) noexcept -> Vec&
   {
     op_assign(rhs, std::plus{}, std::make_index_sequence<N>());
     return *this;
   }
 
-  Vec&
-  operator-=(const Vec& rhs) noexcept
+  auto
+  operator-=(const Vec& rhs) noexcept -> Vec&
   {
     op_assign(rhs.elems, std::minus{}, std::make_index_sequence<N>());
     return *this;
   }
 
-  Vec&
-  operator-=(T rhs) noexcept
+  auto
+  operator-=(T rhs) noexcept -> Vec&
   {
     op_assign(rhs, std::minus{}, std::make_index_sequence<N>());
     return *this;
   }
 
-  Vec&
-  operator*=(const Vec& rhs) noexcept
+  auto
+  operator*=(const Vec& rhs) noexcept -> Vec&
   {
     op_assign(rhs.elems, std::multiplies{}, std::make_index_sequence<N>());
     return *this;
   }
 
-  Vec&
-  operator*=(T rhs) noexcept
+  auto
+  operator*=(T rhs) noexcept -> Vec&
   {
     op_assign(rhs, std::multiplies{}, std::make_index_sequence<N>());
     return *this;
   }
 
-  Vec&
-  operator/=(const Vec& rhs) noexcept
+  auto
+  operator/=(const Vec& rhs) noexcept -> Vec&
   {
     op_assign(rhs.elems, std::divides{}, std::make_index_sequence<N>());
     return *this;
   }
 
-  Vec&
-  operator/=(T rhs) noexcept
+  auto
+  operator/=(T rhs) noexcept -> Vec&
   {
     op_assign(rhs, std::divides{}, std::make_index_sequence<N>());
     return *this;
   }
 
-  bool
-  operator==(const Vec& rhs) const noexcept
+  auto
+  operator==(const Vec& rhs) const noexcept -> bool
   {
     return is_equal(rhs.elems, std::make_index_sequence<N>());
   }
 
-  bool
-  operator!=(const Vec& rhs) const noexcept
+  auto
+  operator!=(const Vec& rhs) const noexcept -> bool
   {
     return !((*this) == rhs);
   }
@@ -176,186 +176,187 @@ struct Vec {
     elems[3] = val;
   }
 
-  T
-  x() const noexcept
+  auto
+  x() const noexcept -> T
   {
     return elems[0];
   }
 
-  T
-  y() const noexcept
+  auto
+  y() const noexcept -> T
   {
     return elems[1];
   }
 
   template<typename V = void, std::enable_if_t<N >= 3, V>* = nullptr>
-  T
-  z() const noexcept
+  auto
+  z() const noexcept -> T
   {
     return elems[2];
   }
 
   template<typename V = void, std::enable_if_t<N >= 4, V>* = nullptr>
-  T
-  w() const noexcept
+  auto
+  w() const noexcept -> T
   {
     return elems[3];
   }
 
-  T
-  dot(const Vec& other) const noexcept
+  auto
+  dot(const Vec& other) const noexcept -> T
   {
     return dot(other, std::make_index_sequence<N>());
   }
 
-  T
-  magnitude() const noexcept
+  auto
+  magnitude() const noexcept -> T
   {
     return std::sqrt(dot(*this));
   }
 
-  T
-  magnitude_squared() const noexcept
+  auto
+  magnitude_squared() const noexcept -> T
   {
     return dot(*this);
   }
 
-  Vec
-  to_unit() const noexcept
+  auto
+  to_unit() const noexcept -> Vec
   {
     return *this / magnitude();
   }
 
-  Vec
-  reflect(const Vec& n) const noexcept
+  auto
+  reflect(const Vec& n) const noexcept -> Vec
   {
     return *this - 2 * dot(n) * n;
   }
 
   template<typename V = void, std::enable_if_t<N == 3, V>* = nullptr>
-  Vec
-  cross(const Vec& other) const noexcept
+  auto
+  cross(const Vec& other) const noexcept -> Vec
   {
     return {elems[1] * other.elems[2] - elems[2] * other.elems[1],
             elems[2] * other.elems[0] - elems[0] * other.elems[2],
             elems[0] * other.elems[1] - elems[1] * other.elems[0]};
   }
 
-  friend Vec
-  operator+(const Vec& val) noexcept
+  friend auto
+  operator+(const Vec& val) noexcept -> Vec
   {
     return val;
   }
 
   template<typename U,
            typename = std::enable_if_t<std::is_invocable_v<std::plus<>, T, U>>>
-  friend Vec<std::invoke_result_t<std::plus<>, T, U>, N>
+  friend auto
   operator+(const Vec& lhs, const Vec<U, N>& rhs) noexcept
+   -> Vec<std::invoke_result_t<std::plus<>, T, U>, N>
   {
     return invoke_op{}(std::plus{}, lhs, rhs, std::make_index_sequence<N>());
   }
 
-  friend Vec
-  operator+(const Vec& lhs, T rhs) noexcept
-  { 
+  friend auto
+  operator+(const Vec& lhs, T rhs) noexcept -> Vec
+  {
     return lhs + Vec{rhs};
   }
 
-  friend Vec
-  operator+(T lhs, const Vec& rhs) noexcept
+  friend auto
+  operator+(T lhs, const Vec& rhs) noexcept -> Vec
   {
     return Vec{lhs} + rhs;
   }
 
-  friend Vec
-  operator-(const Vec& lhs) noexcept
+  friend auto
+  operator-(const Vec& lhs) noexcept -> Vec
   {
     return invoke_op{}(std::negate{}, lhs, std::make_index_sequence<N>());
   }
 
   template<typename U,
            typename = std::enable_if_t<std::is_invocable_v<std::minus<>, T, U>>>
-  friend Vec<std::invoke_result_t<std::minus<>, T, U>, N>
+  friend auto
   operator-(const Vec& lhs, const Vec<U, N>& rhs) noexcept
+   -> Vec<std::invoke_result_t<std::minus<>, T, U>, N>
   {
     return invoke_op{}(std::minus{}, lhs, rhs, std::make_index_sequence<N>());
   }
 
-  friend Vec
-  operator-(const Vec& lhs, T rhs) noexcept
+  friend auto
+  operator-(const Vec& lhs, T rhs) noexcept -> Vec
   {
     return lhs - Vec{rhs};
   }
 
-  friend Vec
-  operator-(T lhs, const Vec& rhs) noexcept
+  friend auto
+  operator-(T lhs, const Vec& rhs) noexcept -> Vec
   {
     return Vec{lhs} - rhs;
   }
 
-  template<typename U,
-           typename = std::enable_if_t<std::is_invocable_v<std::multiplies<>, T, U>>>
-  friend Vec<std::invoke_result_t<std::multiplies<>, T, U>, N>
-  operator*(const Vec& lhs, const Vec<U, N>& rhs) noexcept
+  template<
+   typename U,
+   typename = std::enable_if_t<std::is_invocable_v<std::multiplies<>, T, U>>>
+  friend auto operator*(const Vec& lhs, const Vec<U, N>& rhs) noexcept
+   -> Vec<std::invoke_result_t<std::multiplies<>, T, U>, N>
   {
-    return invoke_op{}(std::multiplies{}, lhs, rhs, std::make_index_sequence<N>());
+    return invoke_op{}(
+     std::multiplies{}, lhs, rhs, std::make_index_sequence<N>());
   }
 
-  friend Vec operator*(const Vec& lhs, T rhs) noexcept
+  friend auto operator*(const Vec& lhs, T rhs) noexcept -> Vec
   {
     return lhs * Vec{rhs};
   }
 
-  friend Vec operator*(T lhs, const Vec& rhs) noexcept
+  friend auto operator*(T lhs, const Vec& rhs) noexcept -> Vec
   {
     return Vec{lhs} * rhs;
   }
-  
-  template<typename U,
-           typename = std::enable_if_t<std::is_invocable_v<std::divides<>, T, U>>>
-  friend Vec<std::invoke_result_t<std::divides<>, T, U>, N>
+
+  template<
+   typename U,
+   typename = std::enable_if_t<std::is_invocable_v<std::divides<>, T, U>>>
+  friend auto
   operator/(const Vec& lhs, const Vec<U, N>& rhs) noexcept
+   -> Vec<std::invoke_result_t<std::divides<>, T, U>, N>
   {
     return invoke_op{}(std::divides{}, lhs, rhs, std::make_index_sequence<N>());
   }
 
-  friend Vec
-  operator/(const Vec& lhs, T rhs) noexcept
+  friend auto
+  operator/(const Vec& lhs, T rhs) noexcept -> Vec
   {
     return lhs / Vec{rhs};
   }
 
-  friend Vec
-  operator/(T lhs, const Vec& rhs) noexcept
+  friend auto
+  operator/(T lhs, const Vec& rhs) noexcept -> Vec
   {
     return Vec{lhs} / rhs;
   }
 
 private:
   struct invoke_op {
-    template<typename P,
-             typename U,
-             std::size_t... Ns,
-             typename R = std::invoke_result_t<P, U>>
-    Vec<R, N>
+    template<typename P, typename U, std::size_t... Ns>
+    auto
     operator()(const P op,
                const Vec<U, N>& lhs,
                std::index_sequence<Ns...>) const noexcept
+     -> Vec<std::invoke_result_t<P, U>, N>
     {
       static_assert(sizeof...(Ns) == N);
       return {op(lhs.elems[Ns])...};
     }
 
-    template<typename P,
-             typename U,
-             typename V,
-             std::size_t... Ns,
-             typename R = std::invoke_result_t<P, U, V>>
-    Vec<R, N>
+    template<typename P, typename U, typename V, std::size_t... Ns>
+    auto
     operator()(const P op,
                const Vec<U, N>& lhs,
                const Vec<V, N>& rhs,
                std::index_sequence<Ns...>) const noexcept
+     -> Vec<std::invoke_result_t<P, U, V>, N>
     {
       static_assert(sizeof...(Ns) == N);
       return {op(lhs.elems[Ns], rhs.elems[Ns])...};
@@ -384,22 +385,22 @@ private:
   }
 
   template<typename U, std::size_t... Ns>
-  bool
-  is_equal(const U (&rhs)[N], std::index_sequence<Ns...>) const noexcept
+  auto
+  is_equal(const U (&rhs)[N], std::index_sequence<Ns...>) const noexcept -> bool
   {
     return ((elems[Ns] == rhs[Ns]) && ... && true);
   }
 
   template<std::size_t... Ns>
-  Vec
-  negate(std::index_sequence<Ns...>) const noexcept
+  auto
+  negate(std::index_sequence<Ns...>) const noexcept -> Vec
   {
     return Vec{(-elems[Ns])...};
   }
 
   template<std::size_t... Ns>
-  T
-  dot(const Vec& other, std::index_sequence<Ns...>) const noexcept
+  auto
+  dot(const Vec& other, std::index_sequence<Ns...>) const noexcept -> T
   {
     return ((elems[Ns] * other.elems[Ns]) + ... + 0);
   }
