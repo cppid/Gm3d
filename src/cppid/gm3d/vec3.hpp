@@ -4,7 +4,7 @@
 #include <cmath>
 #include <type_traits>
 
-#include "Vec.hpp"
+#include "vec.hpp"
 
 namespace cppid::gm3d {
 

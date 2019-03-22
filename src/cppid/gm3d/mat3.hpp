@@ -1,7 +1,7 @@
 #ifndef MOLPHENE_M3D_MAT3_HPP
 #define MOLPHENE_M3D_MAT3_HPP
 
-#include "Mat4.hpp"
+#include "mat4.hpp"
 
 namespace cppid::gm3d {
 template<typename T>

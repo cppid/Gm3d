@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <type_traits>
 
-#include "detail/BasicRgba.hpp"
+#include "detail/basic_rgba.hpp"
 
 namespace cppid::gm3d {
 

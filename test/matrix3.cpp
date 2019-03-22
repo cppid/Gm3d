@@ -4,7 +4,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <cppid/gm3d/Mat3.hpp>
+#include <cppid/gm3d/mat3.hpp>
 
 using cppid::gm3d::Mat3;
 using cppid::gm3d::Mat4;

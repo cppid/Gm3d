@@ -4,7 +4,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <cppid/gm3d/Vec3.hpp>
+#include <cppid/gm3d/vec3.hpp>
 
 using cppid::gm3d::Vec3;
 using Vec3f = Vec3<float>;

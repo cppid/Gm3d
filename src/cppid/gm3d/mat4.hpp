@@ -5,8 +5,8 @@
 #include <type_traits>
 #include <utility>
 
-#include "Vec2.hpp"
-#include "Vec3.hpp"
+#include "vec2.hpp"
+#include "vec3.hpp"
 
 namespace cppid::gm3d {
 

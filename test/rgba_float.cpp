@@ -4,7 +4,7 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <cppid/gm3d/Rgba.hpp>
+#include <cppid/gm3d/rgba.hpp>
 
 using u8 = std::uint8_t;
 using Rgba8 = cppid::gm3d::Rgba<u8>;

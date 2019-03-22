@@ -1,7 +1,7 @@
 #ifndef CPPID_GM3D_VEC2_HPP
 #define CPPID_GM3D_VEC2_HPP
 
-#include "Vec.hpp"
+#include "vec.hpp"
 
 namespace cppid::gm3d {
 
