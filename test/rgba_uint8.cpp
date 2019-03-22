@@ -6,7 +6,7 @@
 
 #include <gm3d/Rgba.hpp>
 
-using Rgba8 = gm3d::Rgba<std::uint8_t>;
+using Rgba8 = cppid::gm3d::Rgba<std::uint8_t>;
 
 TEST_CASE("rgba_uint8 traits")
 {

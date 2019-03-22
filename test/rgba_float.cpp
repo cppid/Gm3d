@@ -7,8 +7,8 @@
 #include <gm3d/Rgba.hpp>
 
 using u8 = std::uint8_t;
-using Rgba8 = gm3d::Rgba<u8>;
-using Rgbaf = gm3d::Rgba<float>;
+using Rgba8 = cppid::gm3d::Rgba<u8>;
+using Rgbaf = cppid::gm3d::Rgba<float>;
 
 TEST_CASE("rgba_uint8 traits")
 {

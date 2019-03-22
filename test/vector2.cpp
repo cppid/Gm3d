@@ -6,7 +6,7 @@
 
 #include <gm3d/Vec2.hpp>
 
-using gm3d::Vec2;
+using cppid::gm3d::Vec2;
 using Vec2f = Vec2<float>;
 
 TEST_CASE("float_vector2_test traits")
