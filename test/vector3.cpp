@@ -4,9 +4,9 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <gm3d/Vec3.hpp>
+#include <cppid/gm3d/Vec3.hpp>
 
-using gm3d::Vec3;
+using cppid::gm3d::Vec3;
 using Vec3f = Vec3<float>;
 
 TEST_CASE("float_vector3_test traits")

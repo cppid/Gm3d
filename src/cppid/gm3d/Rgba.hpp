@@ -1,12 +1,12 @@
-#ifndef GM3D_RGBA_HPP
-#define GM3D_RGBA_HPP
+#ifndef CPPID_GM3D_RGBA_HPP
+#define CPPID_GM3D_RGBA_HPP
 
 #include <cstdint>
 #include <type_traits>
 
 #include "detail/BasicRgba.hpp"
 
-namespace gm3d {
+namespace cppid::gm3d {
 
 template<typename>
 class Rgba;
@@ -59,6 +59,6 @@ public:
   }
 };
 
-} // namespace gm3d
+} // namespace cppid::gm3d
 
 #endif

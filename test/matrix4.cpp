@@ -4,9 +4,9 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <gm3d/Mat4.hpp>
+#include <cppid/gm3d/Mat4.hpp>
 
-using Mat4f = gm3d::Mat4<float>;
+using Mat4f = cppid::gm3d::Mat4<float>;
 
 TEST_CASE("float_matrix4_test traits")
 {

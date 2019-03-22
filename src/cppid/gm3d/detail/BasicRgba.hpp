@@ -1,7 +1,7 @@
-#ifndef GM3D_DETAIL_BASIC_RGBA_HPP
-#define GM3D_DETAIL_BASIC_RGBA_HPP
+#ifndef CPPID_GM3D_DETAIL_BASIC_RGBA_HPP
+#define CPPID_GM3D_DETAIL_BASIC_RGBA_HPP
 
-namespace gm3d::detail {
+namespace cppid::gm3d::detail {
 
 template<typename TRgba, typename T>
 class BasicRgba {
@@ -93,6 +93,6 @@ private:
   Scalar r_, g_, b_, a_;
 };
 
-} // namespace gm3d::detail
+} // namespace cppid::gm3d::detail
 
 #endif

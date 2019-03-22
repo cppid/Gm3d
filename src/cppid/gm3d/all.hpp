@@ -1,5 +1,5 @@
-#ifndef GM3D_ALL_HPP
-#define GM3D_ALL_HPP
+#ifndef CPPID_GM3D_ALL_HPP
+#define CPPID_GM3D_ALL_HPP
 
 #include "Mat3.hpp"
 #include "Mat4.hpp"

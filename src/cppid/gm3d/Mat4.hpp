@@ -1,5 +1,5 @@
-#ifndef GM3D_MAT4_HPP
-#define GM3D_MAT4_HPP
+#ifndef CPPID_GM3D_MAT4_HPP
+#define CPPID_GM3D_MAT4_HPP
 
 #include <cmath>
 #include <type_traits>
@@ -8,7 +8,7 @@
 #include "Vec2.hpp"
 #include "Vec3.hpp"
 
-namespace gm3d {
+namespace cppid::gm3d {
 
 template<typename T>
 struct Mat4 {
@@ -678,6 +678,6 @@ struct Mat4 {
   }
 };
 
-} // namespace gm3d
+} // namespace cppid::gm3d
 
 #endif

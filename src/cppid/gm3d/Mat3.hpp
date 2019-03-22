@@ -3,7 +3,7 @@
 
 #include "Mat4.hpp"
 
-namespace gm3d {
+namespace cppid::gm3d {
 template<typename T>
 struct Mat3 {
   T m[9];
@@ -193,6 +193,6 @@ struct Mat3 {
   }
 };
 
-} // namespace gm3d
+} // namespace cppid::gm3d
 
 #endif

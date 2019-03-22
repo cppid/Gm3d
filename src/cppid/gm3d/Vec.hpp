@@ -1,5 +1,5 @@
-#ifndef GM3D_VEC_HPP
-#define GM3D_VEC_HPP
+#ifndef CPPID_GM3D_VEC_HPP
+#define CPPID_GM3D_VEC_HPP
 
 #include <algorithm>
 #include <cmath>
@@ -11,7 +11,7 @@
 
 #include "detail/type_traits.hpp"
 
-namespace gm3d {
+namespace cppid::gm3d {
 
 template<typename T, std::size_t N>
 struct Vec {
@@ -406,6 +406,6 @@ private:
   }
 };
 
-} // namespace gm3d
+} // namespace cppid::gm3d
 
 #endif
