@@ -5,8 +5,8 @@ add_library(cppid-gm3d INTERFACE)
 add_library(cppid::gm3d ALIAS cppid-gm3d)
 
 target_include_directories(cppid-gm3d
-INTERFACE
-  "${PROJECT_SOURCE_DIR}/src/"
+  INTERFACE
+    "${PROJECT_SOURCE_DIR}/src"
 )
 
 target_compile_options(cppid-gm3d
