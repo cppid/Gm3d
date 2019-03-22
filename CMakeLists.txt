@@ -1,21 +1,26 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.13)
 project(Gm3d)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+add_library(cppid-gm3d INTERFACE)
+add_library(cppid::gm3d ALIAS cppid-gm3d)
 
-set(Gm3d_WARNING_OPTIONS "-Wall" "-Wpedantic")
-
-add_library(gm3d INTERFACE)
-
-target_include_directories(gm3d
+target_include_directories(cppid-gm3d
 INTERFACE
   "${PROJECT_SOURCE_DIR}/src/"
 )
 
-target_compile_options(gm3d INTERFACE ${Gm3d_WARNING_OPTIONS} "-stdlib=libc++")
+target_compile_options(cppid-gm3d
+  INTERFACE
+    -Wall
+    -Wpedantic
+    -pedantic-errors
+    -fno-rtti
+)
 
+target_compile_features(cppid-gm3d
+  INTERFACE
+    cxx_std_17
+)
 
 if(GM3D_BUILD_TESTING)
   enable_testing()
@@ -35,16 +40,15 @@ if(GM3D_BUILD_TESTING)
 
     get_filename_component(Gm3d_NAME ${Gm3d_FILES} NAME_WE)
 
-    set(Gm3d_TARGET_NAME "gm3d-test-${Gm3d_NAME}")
+    set(Gm3d_TARGET_NAME "cppid-gm3d-test-${Gm3d_NAME}")
 
     add_executable(${Gm3d_TARGET_NAME} ${Gm3d_FILES})
 
-    target_link_libraries(${Gm3d_TARGET_NAME} PRIVATE gm3d)
-
-    target_link_libraries(${Gm3d_TARGET_NAME} PRIVATE gm3d Catch2)
-
-    target_compile_options(
-      ${Gm3d_TARGET_NAME} PRIVATE ${Gm3d_WARNING_OPTIONS} "-stdlib=libc++")
+    target_link_libraries(${Gm3d_TARGET_NAME}
+      PRIVATE
+        cppid::gm3d
+        Catch2::Catch2
+    )
 
     add_test(
       NAME ${Gm3d_TARGET_NAME}
@@ -54,5 +58,3 @@ if(GM3D_BUILD_TESTING)
   endforeach()
 
 endif()
-
-
