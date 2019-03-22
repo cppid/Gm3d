@@ -5,17 +5,17 @@
 
 namespace cppid::gm3d {
 template<typename T>
-struct Mat3 {
+struct mat3 {
   T m[9];
 
-  Mat3() noexcept = default;
+  mat3() noexcept = default;
 
-  explicit Mat3(T s) noexcept
-  : Mat3{s, 0, 0, 0, s, 0, 0, 0, s}
+  explicit mat3(T s) noexcept
+  : mat3{s, 0, 0, 0, s, 0, 0, 0, s}
   {
   }
 
-  Mat3(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22) noexcept
+  mat3(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22) noexcept
   : m{m00, m01, m02, m10, m11, m12, m20, m21, m22}
   {
   }
@@ -23,8 +23,8 @@ struct Mat3 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             !std::is_convertible_v<U, T>>* = nullptr>
-  explicit Mat3(const Mat4<U>& m4) noexcept
-  : Mat3(m4.m[0],
+  explicit mat3(const mat4<U>& m4) noexcept
+  : mat3(m4.m[0],
          m4.m[1],
          m4.m[2],
          m4.m[4],
@@ -39,8 +39,8 @@ struct Mat3 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             std::is_convertible_v<U, T>>* = nullptr>
-  Mat3(const Mat4<U>& m4) noexcept
-  : Mat3(m4.m[0],
+  mat3(const mat4<U>& m4) noexcept
+  : mat3(m4.m[0],
          m4.m[1],
          m4.m[2],
          m4.m[4],
@@ -55,8 +55,8 @@ struct Mat3 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             !std::is_convertible_v<U, T>>* = nullptr>
-  explicit Mat3(const Mat3<U>& m3) noexcept
-  : Mat3(m3.m[0],
+  explicit mat3(const mat3<U>& m3) noexcept
+  : mat3(m3.m[0],
          m3.m[1],
          m3.m[2],
          m3.m[3],
@@ -71,8 +71,8 @@ struct Mat3 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             std::is_convertible_v<U, T>>* = nullptr>
-  Mat3(const Mat3<U>& m3) noexcept
-  : Mat3(m3.m[0],
+  mat3(const mat3<U>& m3) noexcept
+  : mat3(m3.m[0],
          m3.m[1],
          m3.m[2],
          m3.m[3],

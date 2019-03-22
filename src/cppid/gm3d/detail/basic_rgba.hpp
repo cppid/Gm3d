@@ -4,23 +4,23 @@
 namespace cppid::gm3d::detail {
 
 template<typename TRgba, typename T>
-class BasicRgba {
+class basic_rgba {
 public:
-  using Scalar = T;
+  using scalar_type = T;
 
-  BasicRgba() noexcept = default;
+  basic_rgba() noexcept = default;
 
-  explicit BasicRgba(Scalar s) noexcept
-  : BasicRgba{s, s, s, s}
+  explicit basic_rgba(scalar_type s) noexcept
+  : basic_rgba{s, s, s, s}
   {
   }
 
-  BasicRgba(Scalar s, Scalar a) noexcept
-  : BasicRgba{s, s, s, a}
+  basic_rgba(scalar_type s, scalar_type a) noexcept
+  : basic_rgba{s, s, s, a}
   {
   }
 
-  BasicRgba(Scalar r, Scalar g, Scalar b, Scalar a) noexcept
+  basic_rgba(scalar_type r, scalar_type g, scalar_type b, scalar_type a) noexcept
   : r_{r}
   , g_{g}
   , b_{b}
@@ -29,68 +29,68 @@ public:
   }
 
   void
-  r(Scalar val) noexcept
+  r(scalar_type val) noexcept
   {
     r_ = val;
   }
 
   void
-  g(Scalar val) noexcept
+  g(scalar_type val) noexcept
   {
     g_ = val;
   }
 
   void
-  b(Scalar val) noexcept
+  b(scalar_type val) noexcept
   {
     b_ = val;
   }
 
   void
-  a(Scalar val) noexcept
+  a(scalar_type val) noexcept
   {
     a_ = val;
   }
 
   auto
-  r() const noexcept -> Scalar
+  r() const noexcept -> scalar_type
   {
     return r_;
   }
 
   auto
-  g() const noexcept -> Scalar
+  g() const noexcept -> scalar_type
   {
     return g_;
   }
 
   auto
-  b() const noexcept -> Scalar
+  b() const noexcept -> scalar_type
   {
     return b_;
   }
 
   auto
-  a() const noexcept -> Scalar
+  a() const noexcept -> scalar_type
   {
     return a_;
   }
 
   friend auto
-  operator==(const BasicRgba& lhs, const BasicRgba& rhs) noexcept -> bool
+  operator==(const basic_rgba& lhs, const basic_rgba& rhs) noexcept -> bool
   {
     return lhs.r() == rhs.r() && lhs.g() == rhs.g() && lhs.b() == rhs.b() &&
            lhs.a() == rhs.a();
   }
 
   friend auto
-  operator!=(const BasicRgba& lhs, const BasicRgba& rhs) noexcept -> bool
+  operator!=(const basic_rgba& lhs, const basic_rgba& rhs) noexcept -> bool
   {
     return !(lhs == rhs);
   }
 
 private:
-  Scalar r_, g_, b_, a_;
+  scalar_type r_, g_, b_, a_;
 };
 
 } // namespace cppid::gm3d::detail

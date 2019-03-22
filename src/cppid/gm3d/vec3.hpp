@@ -1,15 +1,12 @@
 #ifndef CPPID_GM3D_VEC3_HPP
 #define CPPID_GM3D_VEC3_HPP
 
-#include <cmath>
-#include <type_traits>
-
 #include "vec.hpp"
 
 namespace cppid::gm3d {
 
 template<typename T>
-using Vec3 = Vec<T, 3>;
+using vec3 = vec<T, 3>;
 
 } // namespace cppid::gm3d
 

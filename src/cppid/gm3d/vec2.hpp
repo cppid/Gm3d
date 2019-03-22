@@ -6,7 +6,7 @@
 namespace cppid::gm3d {
 
 template<typename T>
-using Vec2 = Vec<T, 2>;
+using vec2 = vec<T, 2>;
 
 } // namespace cppid::gm3d
 
