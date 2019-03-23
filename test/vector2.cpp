@@ -1,6 +1,8 @@
 #include <cfloat>
 #include <type_traits>
 
+#include <boost/qvm/all.hpp>
+
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
@@ -14,6 +16,10 @@ TEST_CASE("float_vector2_test traits")
   REQUIRE(std::is_trivial_v<vec2f>);
   REQUIRE(std::is_standard_layout_v<vec2f>);
   REQUIRE(sizeof(vec2f) == (sizeof(float) * 2));
+
+  REQUIRE((
+   std::is_same_v<float, typename boost::qvm::vec_traits<vec2f>::scalar_type>));
+  REQUIRE(boost::qvm::vec_traits<vec2f>::dim == 2);
 }
 
 TEST_CASE("float_vector2_test initialization")

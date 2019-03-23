@@ -1,6 +1,8 @@
 #include <cfloat>
 #include <type_traits>
 
+#include <boost/qvm/all.hpp>
+
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
@@ -14,6 +16,10 @@ TEST_CASE("float_vector3_test traits")
   REQUIRE(std::is_trivial_v<vec3f>);
   REQUIRE(std::is_standard_layout_v<vec3f>);
   REQUIRE(sizeof(vec3f) == (sizeof(float) * 3));
+
+  REQUIRE((
+   std::is_same_v<float, typename boost::qvm::vec_traits<vec3f>::scalar_type>));
+  REQUIRE(boost::qvm::vec_traits<vec3f>::dim == 3);
 }
 
 TEST_CASE("float_vector3_test initialization")

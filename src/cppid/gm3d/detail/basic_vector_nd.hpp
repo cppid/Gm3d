@@ -384,7 +384,7 @@ template<typename T, std::size_t N>
 struct vec_traits<cppid::gm3d::detail::basic_vector_nd<T, N>> {
   using scalar_type = T;
 
-  static int const dim = N;
+  static constexpr int dim = N;
 
   template<int I>
   static inline auto write_element(
