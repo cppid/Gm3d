@@ -6,10 +6,10 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <cppid/gm3d/vec2.hpp>
+#include <cppid/gm3d/vector_2d.hpp>
 
-using cppid::gm3d::vec2;
-using vec2f = vec2<float>;
+using cppid::gm3d::vector_2d;
+using vec2f = vector_2d<float>;
 
 TEST_CASE("float_vector2_test traits")
 {
@@ -40,18 +40,18 @@ TEST_CASE("float_vector2_test initialization")
     REQUIRE(vt.y() == 2.3f);
   }
   {
-    auto vt = vec2f{vec2<int>{0}};
+    auto vt = vec2f{vector_2d<int>{0}};
     REQUIRE(vt.x() == 0.0f);
     REQUIRE(vt.y() == 0.0f);
   }
   {
     auto vt = vec2f{0};
-    vt = vec2<int>{0};
+    vt = vector_2d<int>{0};
     REQUIRE(vt.x() == 0.0f);
     REQUIRE(vt.y() == 0.0f);
   }
   {
-    auto vd = vec2<double>{0};
+    auto vd = vector_2d<double>{0};
     vec2f vt = vd;
     CHECK(vt.x() == 0.0f);
     CHECK(vt.y() == 0.0f);

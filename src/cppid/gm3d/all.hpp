@@ -4,7 +4,7 @@
 #include "mat3.hpp"
 #include "mat4.hpp"
 #include "rgba.hpp"
-#include "vec2.hpp"
-#include "vec3.hpp"
+#include "vector_2d.hpp"
+#include "vector_3d.hpp"
 
 #endif
