@@ -1,5 +1,5 @@
-#ifndef CPPID_GM3D_BASIC_VECTOR_ND_HPP
-#define CPPID_GM3D_BASIC_VECTOR_ND_HPP
+#ifndef CPPID_GM3D_DETAIL_BASIC_VECTOR_ND_HPP
+#define CPPID_GM3D_DETAIL_BASIC_VECTOR_ND_HPP
 
 #include <algorithm>
 #include <cmath>
@@ -11,9 +11,9 @@
 
 #include <boost/qvm/all.hpp>
 
-#include "detail/type_traits.hpp"
+#include "type_traits.hpp"
 
-namespace cppid::gm3d {
+namespace cppid::gm3d::detail {
 
 template<typename T, std::size_t N>
 struct basic_vector_nd {
@@ -381,14 +381,14 @@ private:
 
 namespace boost::qvm {
 template<typename T, std::size_t N>
-struct vec_traits<cppid::gm3d::basic_vector_nd<T, N>> {
+struct vec_traits<cppid::gm3d::detail::basic_vector_nd<T, N>> {
   using scalar_type = T;
 
   static int const dim = N;
 
   template<int I>
   static inline auto write_element(
-   cppid::gm3d::basic_vector_nd<scalar_type, dim>& v) noexcept
+   cppid::gm3d::detail::basic_vector_nd<scalar_type, dim>& v) noexcept
    -> scalar_type&
   {
     return v.elems[I];
@@ -396,14 +396,14 @@ struct vec_traits<cppid::gm3d::basic_vector_nd<T, N>> {
 
   template<int I>
   static inline auto read_element(
-   cppid::gm3d::basic_vector_nd<scalar_type, dim> const& v) noexcept
+   cppid::gm3d::detail::basic_vector_nd<scalar_type, dim> const& v) noexcept
    -> scalar_type
   {
     return v.elems[I];
   }
 
   static inline auto write_element_idx(
-   int i, cppid::gm3d::basic_vector_nd<scalar_type, dim>& v) noexcept
+   int i, cppid::gm3d::detail::basic_vector_nd<scalar_type, dim>& v) noexcept
    -> scalar_type&
   {
     return v.elems[i];
@@ -411,7 +411,7 @@ struct vec_traits<cppid::gm3d::basic_vector_nd<T, N>> {
 
   static inline auto read_element_idx(
    int i,
-   cppid::gm3d::basic_vector_nd<scalar_type, dim> const& v) noexcept
+   cppid::gm3d::detail::basic_vector_nd<scalar_type, dim> const& v) noexcept
    -> scalar_type
   {
     return v.elems[i];
