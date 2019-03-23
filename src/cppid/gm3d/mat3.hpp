@@ -84,110 +84,92 @@ struct mat3 {
   {
   }
 
-  void
-  m00(T val) noexcept
+  void m00(T val) noexcept
   {
     m[0] = val;
   }
 
-  void
-  m01(T val) noexcept
+  void m01(T val) noexcept
   {
     m[1] = val;
   }
 
-  void
-  m02(T val) noexcept
+  void m02(T val) noexcept
   {
     m[2] = val;
   }
 
-  void
-  m10(T val) noexcept
+  void m10(T val) noexcept
   {
     m[3] = val;
   }
 
-  void
-  m11(T val) noexcept
+  void m11(T val) noexcept
   {
     m[4] = val;
   }
 
-  void
-  m12(T val) noexcept
+  void m12(T val) noexcept
   {
     m[5] = val;
   }
 
-  void
-  m20(T val) noexcept
+  void m20(T val) noexcept
   {
     m[6] = val;
   }
 
-  void
-  m21(T val) noexcept
+  void m21(T val) noexcept
   {
     m[7] = val;
   }
 
-  void
-  m22(T val) noexcept
+  void m22(T val) noexcept
   {
     m[8] = val;
   }
 
-  auto
-  m00() const noexcept -> T
+  auto m00() const noexcept -> T
   {
     return m[0];
   }
 
-  auto
-  m01() const noexcept -> T
+  auto m01() const noexcept -> T
   {
     return m[1];
   }
 
-  auto
-  m02() const noexcept -> T
+  auto m02() const noexcept -> T
   {
     return m[2];
   }
 
-  auto
-  m10() const noexcept -> T
+  auto m10() const noexcept -> T
   {
     return m[3];
   }
 
-  auto
-  m11() const noexcept -> T
+  auto m11() const noexcept -> T
   {
     return m[4];
   }
 
-  auto
-  m12() const noexcept -> T
+  auto m12() const noexcept -> T
   {
     return m[5];
   }
 
-  auto
-  m20() const noexcept -> T
+  auto m20() const noexcept -> T
   {
     return m[6];
   }
 
-  auto
-  m21() const noexcept -> T
+  auto m21() const noexcept -> T
   {
     return m[7];
   }
 
-  auto
-  m22() const noexcept -> T
+  auto m22() const noexcept -> T
   {
     return m[8];
   }
