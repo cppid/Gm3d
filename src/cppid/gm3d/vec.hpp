@@ -9,6 +9,8 @@
 #include <type_traits>
 #include <utility>
 
+#include <boost/qvm/all.hpp>
+
 #include "detail/type_traits.hpp"
 
 namespace cppid::gm3d {
@@ -211,9 +213,7 @@ struct vec {
   template<typename V = void, std::enable_if_t<N == 3, V>* = nullptr>
   auto cross(const vec& other) const noexcept -> vec
   {
-    return {elems[1] * other.elems[2] - elems[2] * other.elems[1],
-            elems[2] * other.elems[0] - elems[0] * other.elems[2],
-            elems[0] * other.elems[1] - elems[1] * other.elems[0]};
+    return boost::qvm::cross(*this, other);
   }
 
   friend auto operator+(const vec& val) noexcept -> vec
@@ -366,4 +366,42 @@ private:
 
 } // namespace cppid::gm3d
 
+namespace boost::qvm {
+template<typename T, std::size_t N>
+struct vec_traits<cppid::gm3d::vec<T, N>> {
+  using scalar_type = T;
+
+  static int const dim = N;
+
+  template<int I>
+  static inline auto
+  write_element(cppid::gm3d::vec<scalar_type, dim>& v) noexcept -> scalar_type&
+  {
+    return v.elems[I];
+  }
+
+  template<int I>
+  static inline auto
+  read_element(cppid::gm3d::vec<scalar_type, dim> const& v) noexcept
+   -> scalar_type
+  {
+    return v.elems[I];
+  }
+
+  static inline auto
+  write_element_idx(int i, cppid::gm3d::vec<scalar_type, dim>& v) noexcept
+   -> scalar_type&
+  {
+    return v.elems[i];
+  }
+
+  static inline auto
+  read_element_idx(int i, cppid::gm3d::vec<scalar_type, dim> const& v) noexcept
+   -> scalar_type
+  {
+    return v.elems[i];
+  }
+};
+
+} // namespace boost::qvm
 #endif

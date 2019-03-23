@@ -1,12 +1,30 @@
 cmake_minimum_required(VERSION 3.13)
 project(Gm3d)
 
+find_package(Boost)
+
+if(NOT Boost_FOUND)
+  add_library(Boost::boost INTERFACE IMPORTED)
+  if(BOOST_ROOT)
+    target_include_directories(Boost::boost INTERFACE ${BOOST_ROOT}/include)
+  elseif(BOOST_INCLUDEDIR)
+    target_include_directories(Boost::boost INTERFACE ${BOOST_INCLUDEDIR})
+  else()
+    message(SEND_ERROR "Unable to find the Boost header files. Please set BOOST_ROOT to the root directory containing Boost or BOOST_INCLUDEDIR to the directory containing Boost's headers.")
+  endif()
+endif()
+
 add_library(cppid-gm3d INTERFACE)
 add_library(cppid::gm3d ALIAS cppid-gm3d)
 
 target_include_directories(cppid-gm3d
   INTERFACE
     "${PROJECT_SOURCE_DIR}/src"
+)
+
+target_link_libraries(cppid-gm3d
+  INTERFACE
+    Boost::boost
 )
 
 target_compile_options(cppid-gm3d
