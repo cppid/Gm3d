@@ -1,9 +1,12 @@
 #ifndef MOLPHENE_M3D_MAT3_HPP
 #define MOLPHENE_M3D_MAT3_HPP
 
+#include <boost/qvm/all.hpp>
+
 #include "mat4.hpp"
 
 namespace cppid::gm3d {
+
 template<typename T>
 struct mat3 {
   T m[9];
@@ -176,5 +179,39 @@ struct mat3 {
 };
 
 } // namespace cppid::gm3d
+
+namespace boost::qvm {
+
+template<class T>
+struct mat_traits<cppid::gm3d::mat3<T>> {
+  using scalar_type = T;
+  static int const rows = 3;
+  static int const cols = 3;
+
+  template<int Row, int Col>
+  static scalar_type read_element(cppid::gm3d::mat3<scalar_type> const& x)
+  {
+    return x.m[Row * 3 + Col];
+  }
+
+  template<int Row, int Col>
+  static scalar_type& write_element(cppid::gm3d::mat3<scalar_type>& x)
+  {
+    return x.m[Row * 3 + Col];
+  }
+
+  static scalar_type
+  read_element_idx(int row, int col, cppid::gm3d::mat3<scalar_type> const& x)
+  {
+    return x.m[row * 3 + col];
+  }
+
+  static scalar_type&
+  write_element_idx(int row, int col, cppid::gm3d::mat3<scalar_type>& x)
+  {
+    return x.m[row * 3 + col];
+  }
+};
+} // namespace boost::qvm
 
 #endif
