@@ -5,23 +5,23 @@
 #include <type_traits>
 #include <utility>
 
-#include "Vec2.hpp"
-#include "Vec3.hpp"
+#include "vec2.hpp"
+#include "vec3.hpp"
 
 namespace cppid::gm3d {
 
 template<typename T>
-struct Mat4 {
+struct mat4 {
   T m[16];
 
-  Mat4() noexcept = default;
+  mat4() noexcept = default;
 
-  explicit Mat4(T s) noexcept
-  : Mat4{s, 0, 0, 0, 0, s, 0, 0, 0, 0, s, 0, 0, 0, 0, s}
+  explicit mat4(T s) noexcept
+  : mat4{s, 0, 0, 0, 0, s, 0, 0, 0, 0, s, 0, 0, 0, 0, s}
   {
   }
 
-  Mat4(T m00,
+  mat4(T m00,
        T m01,
        T m02,
        T m03,
@@ -59,8 +59,8 @@ struct Mat4 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             !std::is_convertible_v<U, T>>* = nullptr>
-  explicit Mat4(const Mat4<U>& m) noexcept
-  : Mat4(m.m[0],
+  explicit mat4(const mat4<U>& m) noexcept
+  : mat4(m.m[0],
          m.m[1],
          m.m[2],
          m.m[3],
@@ -82,8 +82,8 @@ struct Mat4 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             std::is_convertible_v<U, T>>* = nullptr>
-  explicit Mat4(const Mat4<U>& m) noexcept
-  : Mat4(m.m[0],
+  explicit mat4(const mat4<U>& m) noexcept
+  : mat4(m.m[0],
          m.m[1],
          m.m[2],
          m.m[3],
@@ -103,7 +103,7 @@ struct Mat4 {
   }
 
   auto
-  operator*=(const Mat4& m4) noexcept -> Mat4&
+  operator*=(const mat4& m4) noexcept -> mat4&
   {
     const auto m00 = m[0], m01 = m[1], m02 = m[2], m03 = m[3], m10 = m[4],
                m11 = m[5], m12 = m[6], m13 = m[7], m20 = m[8], m21 = m[9],
@@ -135,13 +135,13 @@ struct Mat4 {
     return *this;
   }
 
-  auto operator*(const Mat4& m4) const noexcept -> Mat4
+  auto operator*(const mat4& m4) const noexcept -> mat4
   {
-    return Mat4{*this} *= m4;
+    return mat4{*this} *= m4;
   }
 
   auto
-  operator*=(T s) noexcept -> Mat4&
+  operator*=(T s) noexcept -> mat4&
   {
     m[0] *= s;
     m[1] *= s;
@@ -163,9 +163,9 @@ struct Mat4 {
     return *this;
   }
 
-  auto operator*(T s) const noexcept -> Mat4
+  auto operator*(T s) const noexcept -> mat4
   {
-    return Mat4{*this} *= s;
+    return mat4{*this} *= s;
   }
 
   void
@@ -361,19 +361,19 @@ struct Mat4 {
   }
 
   auto
-  scale(T s) noexcept -> Mat4&
+  scale(T s) noexcept -> mat4&
   {
     return scale(s, s, s);
   }
 
   auto
-  scale(const Vec3<T>& v) noexcept -> Mat4&
+  scale(const vec3<T>& v) noexcept -> mat4&
   {
     return scale(v.x(), v.y(), v.z());
   }
 
   auto
-  scale(T x, T y, T z) noexcept -> Mat4&
+  scale(T x, T y, T z) noexcept -> mat4&
   {
     m[0] *= x;
     m[5] *= y;
@@ -382,13 +382,13 @@ struct Mat4 {
   }
 
   auto
-  identity() noexcept -> Mat4&
+  identity() noexcept -> mat4&
   {
     return *this = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
   }
 
   auto
-  rotate(T a, const Vec3<T>& origin) noexcept -> Mat4&
+  rotate(T a, const vec3<T>& origin) noexcept -> mat4&
   {
     // zero rotation is nothing
     if(!a) {
@@ -447,7 +447,7 @@ struct Mat4 {
   }
 
   auto
-  translate(T x, T y, T z) noexcept -> Mat4&
+  translate(T x, T y, T z) noexcept -> mat4&
   {
     const auto m03 = m[3];
     const auto m13 = m[7];
@@ -473,13 +473,13 @@ struct Mat4 {
   }
 
   auto
-  translate(const Vec3<T>& v) noexcept -> Mat4&
+  translate(const vec3<T>& v) noexcept -> mat4&
   {
     return translate(v.x(), v.y(), v.z());
   }
 
   auto
-  frustum(T l, T r, T b, T t, T n, T f) noexcept -> Mat4&
+  frustum(T l, T r, T b, T t, T n, T f) noexcept -> mat4&
   {
     m[0] = 2 * n / (r - l);
     m[5] = 2 * n / (t - b);
@@ -500,7 +500,7 @@ struct Mat4 {
   }
 
   auto
-  orthogonal(T l, T r, T b, T t, T n, T f) noexcept -> Mat4&
+  orthogonal(T l, T r, T b, T t, T n, T f) noexcept -> mat4&
   {
     m[0] = 2 / (r - l);
     m[5] = 2 / (t - b);
@@ -516,7 +516,7 @@ struct Mat4 {
   }
 
   auto
-  lookat(T ex, T ey, T ez, T lx, T ly, T lz, T ux, T uy, T uz) noexcept -> Mat4&
+  lookat(T ex, T ey, T ez, T lx, T ly, T lz, T ux, T uy, T uz) noexcept -> mat4&
   {
     auto fx = ex - lx;
     auto fy = ey - ly;
@@ -562,14 +562,14 @@ struct Mat4 {
   }
 
   auto
-  lookat(Vec3<T> e, Vec3<T> l, Vec3<T> u) noexcept -> Mat4&
+  lookat(vec3<T> e, vec3<T> l, vec3<T> u) noexcept -> mat4&
   {
     return lookat(
      e.x(), e.y(), e.z(), l.x(), l.y(), l.z(), u.x(), u.y(), u.z());
   }
 
   auto
-  perspective(T fov, T a, T n, T f) noexcept -> Mat4&
+  perspective(T fov, T a, T n, T f) noexcept -> mat4&
   {
     const auto t = std::tan(fov / 2) * n;
     const auto r = a * t;
@@ -578,7 +578,7 @@ struct Mat4 {
   }
 
   auto
-  adjoint() noexcept -> Mat4&
+  adjoint() noexcept -> mat4&
   {
     const auto m00 = m[0], m01 = m[1], m02 = m[2], m03 = m[3], m10 = m[4],
                m11 = m[5], m12 = m[6], m13 = m[7], m20 = m[8], m21 = m[9],
@@ -628,7 +628,7 @@ struct Mat4 {
   }
 
   auto
-  inverse() noexcept -> Mat4&
+  inverse() noexcept -> mat4&
   {
     const auto det = determinant();
     adjoint();
@@ -636,7 +636,7 @@ struct Mat4 {
   }
 
   auto
-  transpose() noexcept -> Mat4&
+  transpose() noexcept -> mat4&
   {
     *this = {m[0],
              m[4],

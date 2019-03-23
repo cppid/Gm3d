@@ -4,21 +4,21 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <cppid/gm3d/Mat4.hpp>
+#include <cppid/gm3d/mat4.hpp>
 
-using Mat4f = cppid::gm3d::Mat4<float>;
+using mat4f = cppid::gm3d::mat4<float>;
 
 TEST_CASE("float_matrix4_test traits")
 {
-  REQUIRE(std::is_trivial_v<Mat4f>);
-  REQUIRE(std::is_standard_layout_v<Mat4f>);
-  REQUIRE(sizeof(Mat4f) == (sizeof(float) * 16));
+  REQUIRE(std::is_trivial_v<mat4f>);
+  REQUIRE(std::is_standard_layout_v<mat4f>);
+  REQUIRE(sizeof(mat4f) == (sizeof(float) * 16));
 }
 
 TEST_CASE("float_matrix4_test initialization")
 {
   {
-    auto mat = Mat4f{1};
+    auto mat = mat4f{1};
     REQUIRE(mat.m00() == 1.0f);
     REQUIRE(mat.m01() == 0.0f);
     REQUIRE(mat.m02() == 0.0f);
@@ -40,7 +40,7 @@ TEST_CASE("float_matrix4_test initialization")
     REQUIRE(mat.m33() == 1.0f);
   }
   {
-    auto mat = Mat4f{0.0f,
+    auto mat = mat4f{0.0f,
                      1.0f,
                      2.0f,
                      3.0f,
