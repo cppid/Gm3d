@@ -23,28 +23,9 @@ struct basic_vector_nd
 
   using basic_point_vector<basic_vector_nd<T, N>, T, N>::dimensions;
 
+  using basic_point_vector<basic_vector_nd<T, N>, T, N>::basic_point_vector;
+
   basic_vector_nd() noexcept = default;
-
-  explicit basic_vector_nd(scalar_type s) noexcept
-  : basic_vector_nd{s, std::make_index_sequence<dimensions>()}
-  {
-  }
-
-  template<std::size_t... Ns,
-           typename = std::enable_if_t<(sizeof...(Ns) == dimensions)>>
-  basic_vector_nd(scalar_type s, std::index_sequence<Ns...>) noexcept
-  : basic_vector_nd{(static_cast<void>(Ns), s)...}
-  {
-  }
-
-  template<
-   typename... Us,
-   typename = std::enable_if_t<((sizeof...(Us) == dimensions) && ... &&
-                                std::is_convertible_v<Us, scalar_type>)>>
-  basic_vector_nd(Us... args) noexcept
-  : basic_point_vector<basic_vector_nd<T, N>, T, N>::basic_point_vector{args...}
-  {
-  }
 
   template<typename U,
            std::enable_if_t<

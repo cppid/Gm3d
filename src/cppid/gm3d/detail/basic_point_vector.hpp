@@ -31,6 +31,18 @@ struct basic_point_vector {
   {
   }
 
+  explicit basic_point_vector(scalar_type s) noexcept
+  : basic_point_vector{s, std::make_index_sequence<dimensions>()}
+  {
+  }
+
+  template<std::size_t... Ns,
+           typename = std::enable_if_t<(sizeof...(Ns) == dimensions)>>
+  basic_point_vector(scalar_type s, std::index_sequence<Ns...>) noexcept
+  : basic_point_vector{(static_cast<void>(Ns), s)...}
+  {
+  }
+
   void x(scalar_type val) noexcept
   {
     elems[0] = val;
