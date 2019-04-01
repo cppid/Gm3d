@@ -48,6 +48,8 @@ if(GM3D_BUILD_TESTING)
   set(Gm3d_TEST_SRC_FILES
   "${PROJECT_SOURCE_DIR}/test/matrix3.cpp"
   "${PROJECT_SOURCE_DIR}/test/matrix4.cpp"
+  "${PROJECT_SOURCE_DIR}/test/point2.cpp"
+  "${PROJECT_SOURCE_DIR}/test/point3.cpp"
   "${PROJECT_SOURCE_DIR}/test/rgba_float.cpp"
   "${PROJECT_SOURCE_DIR}/test/rgba_uint8.cpp"
   "${PROJECT_SOURCE_DIR}/test/vector2.cpp"

@@ -1,19 +1,25 @@
 #include <cfloat>
 #include <type_traits>
 
+#include <boost/qvm/all.hpp>
+
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <cppid/gm3d/vec3.hpp>
+#include <cppid/gm3d/vector_3d.hpp>
 
-using cppid::gm3d::vec3;
-using vec3f = vec3<float>;
+using cppid::gm3d::vector_3d;
+using vec3f = vector_3d<float>;
 
 TEST_CASE("float_vector3_test traits")
 {
   REQUIRE(std::is_trivial_v<vec3f>);
   REQUIRE(std::is_standard_layout_v<vec3f>);
   REQUIRE(sizeof(vec3f) == (sizeof(float) * 3));
+
+  REQUIRE((
+   std::is_same_v<float, typename boost::qvm::vec_traits<vec3f>::scalar_type>));
+  REQUIRE(boost::qvm::vec_traits<vec3f>::dim == 3);
 }
 
 TEST_CASE("float_vector3_test initialization")
@@ -37,20 +43,20 @@ TEST_CASE("float_vector3_test initialization")
     REQUIRE(vt.z() == 6.4f);
   }
   {
-    auto vt = vec3f{vec3<int>{0}};
+    auto vt = vec3f{vector_3d<int>{0}};
     REQUIRE(vt.x() == 0.0f);
     REQUIRE(vt.y() == 0.0f);
     REQUIRE(vt.z() == 0.0f);
   }
   {
     auto vt = vec3f{0};
-    vt = vec3<int>{0};
+    vt = vector_3d<int>{0};
     REQUIRE(vt.x() == 0.0f);
     REQUIRE(vt.y() == 0.0f);
     REQUIRE(vt.z() == 0.0f);
   }
   {
-    auto vd = vec3<double>{0};
+    auto vd = vector_3d<double>{0};
     vec3f vt = vd;
     CHECK(vt.x() == 0.0f);
     CHECK(vt.y() == 0.0f);
@@ -103,7 +109,7 @@ TEST_CASE("float_vector3_test addition")
     REQUIRE(vt.z() == Approx(1.2f));
   }
   {
-    auto vt = vec3<float>{0} + vec3<double>{0};
+    auto vt = vector_3d<float>{0} + vector_3d<double>{0};
     CHECK(vt.x() == Approx(0.));
     CHECK(vt.y() == Approx(0.));
     CHECK(vt.z() == Approx(0.));
@@ -145,7 +151,7 @@ TEST_CASE("float_vector3_test subtraction")
     REQUIRE(vt.z() == Approx(-6.4f));
   }
   {
-    auto vt = vec3<float>{0} - vec3<double>{0};
+    auto vt = vector_3d<float>{0} - vector_3d<double>{0};
     CHECK(vt.x() == Approx(0.));
     CHECK(vt.y() == Approx(0.));
     CHECK(vt.z() == Approx(0.));
@@ -187,7 +193,7 @@ TEST_CASE("float_vector3_test multiplication")
     REQUIRE(vt.z() == Approx(15.4f));
   }
   {
-    auto vt = vec3<float>{0} * vec3<double>{0};
+    auto vt = vector_3d<float>{0} * vector_3d<double>{0};
     CHECK(vt.x() == Approx(0.));
     CHECK(vt.y() == Approx(0.));
     CHECK(vt.z() == Approx(0.));
@@ -229,7 +235,7 @@ TEST_CASE("float_vector3_test division")
     REQUIRE(vt.z() == Approx(1.0f));
   }
   {
-    auto vt = vec3<float>{0} / vec3<double>{1};
+    auto vt = vector_3d<float>{0} / vector_3d<double>{1};
     CHECK(vt.x() == Approx(0.));
     CHECK(vt.y() == Approx(0.));
     CHECK(vt.z() == Approx(0.));

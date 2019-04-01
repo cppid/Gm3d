@@ -7,8 +7,8 @@
 
 #include <boost/qvm/all.hpp>
 
-#include "vec2.hpp"
-#include "vec3.hpp"
+#include "vector_2d.hpp"
+#include "vector_3d.hpp"
 
 namespace cppid::gm3d {
 
@@ -333,7 +333,7 @@ struct mat4 {
     return scale(s, s, s);
   }
 
-  auto scale(const vec3<T>& v) noexcept -> mat4&
+  auto scale(const vector_3d<T>& v) noexcept -> mat4&
   {
     return scale(v.x(), v.y(), v.z());
   }
@@ -352,7 +352,7 @@ struct mat4 {
     return *this;
   }
 
-  auto rotate(const vec3<T>& origin, T a) noexcept -> mat4&
+  auto rotate(const vector_3d<T>& origin, T a) noexcept -> mat4&
   {
     boost::qvm::rotate(*this, origin, a);
     return *this;
@@ -383,7 +383,7 @@ struct mat4 {
     return *this;
   }
 
-  auto translate(const vec3<T>& v) noexcept -> mat4&
+  auto translate(const vector_3d<T>& v) noexcept -> mat4&
   {
     return translate(v.x(), v.y(), v.z());
   }
@@ -469,7 +469,7 @@ struct mat4 {
     return *this;
   }
 
-  auto lookat(vec3<T> e, vec3<T> l, vec3<T> u) noexcept -> mat4&
+  auto lookat(vector_3d<T> e, vector_3d<T> l, vector_3d<T> u) noexcept -> mat4&
   {
     return lookat(
      e.x(), e.y(), e.z(), l.x(), l.y(), l.z(), u.x(), u.y(), u.z());
