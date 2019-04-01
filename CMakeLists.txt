@@ -15,7 +15,7 @@ if(NOT Boost_FOUND)
 endif()
 
 add_library(cppid-gm3d INTERFACE)
-add_library(cppid::gm3d ALIAS cppid-gm3d)
+add_library(Cppid::gm3d ALIAS cppid-gm3d)
 
 target_include_directories(cppid-gm3d
   INTERFACE
@@ -66,7 +66,7 @@ if(GM3D_BUILD_TESTING)
 
     target_link_libraries(${Gm3d_TARGET_NAME}
       PRIVATE
-        cppid::gm3d
+        Cppid::gm3d
         Catch2::Catch2
     )
 
