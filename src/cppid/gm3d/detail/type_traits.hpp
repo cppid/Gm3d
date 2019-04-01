@@ -1,10 +1,10 @@
-#ifndef GM3D_DETAIL_TYPE_TRAITS_HPP
-#define GM3D_DETAIL_TYPE_TRAITS_HPP
+#ifndef CPPID_GM3D_DETAIL_TYPE_TRAITS_HPP
+#define CPPID_GM3D_DETAIL_TYPE_TRAITS_HPP
 
 #include <cstddef>
 #include <type_traits>
 
-namespace gm3d::detail {
+namespace cppid::gm3d::detail {
 
 template<typename T, typename U>
 struct is_explicit_constructible
@@ -26,6 +26,6 @@ template<typename T, typename U>
 inline constexpr bool is_implicit_constructible_v =
  is_implicit_constructible<T, U>::value;
 
-} // namespace gm3d::detail
+} // namespace cppid::gm3d::detail
 
 #endif

@@ -4,42 +4,42 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
-#include <gm3d/Rgba.hpp>
+#include <cppid/gm3d/rgba.hpp>
 
-using Rgba8 = gm3d::Rgba<std::uint8_t>;
+using rgba8 = cppid::gm3d::rgba<std::uint8_t>;
 
 TEST_CASE("rgba_uint8 traits")
 {
-  REQUIRE(std::is_trivial_v<Rgba8>);
-  REQUIRE(std::is_standard_layout_v<Rgba8>);
-  REQUIRE(sizeof(Rgba8) == (sizeof(std::uint8_t) * 4));
+  REQUIRE(std::is_trivial_v<rgba8>);
+  REQUIRE(std::is_standard_layout_v<rgba8>);
+  REQUIRE(sizeof(rgba8) == (sizeof(std::uint8_t) * 4));
 }
 
 TEST_CASE("rgba_uint8 initialization")
 {
   {
-    auto col = Rgba8{0};
+    auto col = rgba8{0};
     REQUIRE(col.r() == 0);
     REQUIRE(col.g() == 0);
     REQUIRE(col.b() == 0);
     REQUIRE(col.a() == 0);
   }
   {
-    auto col = Rgba8{0xFF, 0x7F};
+    auto col = rgba8{0xFF, 0x7F};
     REQUIRE(col.r() == 0xFF);
     REQUIRE(col.g() == 0xFF);
     REQUIRE(col.b() == 0xFF);
     REQUIRE(col.a() == 0x7F);
   }
   {
-    auto col = Rgba8{0xFF, 0x7F, 0x50};
+    auto col = rgba8{0xFF, 0x7F, 0x50};
     REQUIRE(col.r() == 0xFF);
     REQUIRE(col.g() == 0x7F);
     REQUIRE(col.b() == 0x50);
     REQUIRE(col.a() == 255);
   }
   {
-    auto col = Rgba8{0xFF, 0x7F, 0x50, 21};
+    auto col = rgba8{0xFF, 0x7F, 0x50, 21};
     REQUIRE(col.r() == 0xFF);
     REQUIRE(col.g() == 0x7F);
     REQUIRE(col.b() == 0x50);
@@ -49,10 +49,10 @@ TEST_CASE("rgba_uint8 initialization")
 
 TEST_CASE("rgba_uint8 equality comparable")
 {
-  auto cola = Rgba8{0xFF, 0x7F, 0x50, 0x00};
-  auto colb = Rgba8{0xFF, 0x7F, 0x50, 0x00};
-  auto colc = Rgba8{0xFF, 0x7F, 0x50, 0x00};
-  auto cold = Rgba8{0, 0, 0, 0};
+  auto cola = rgba8{0xFF, 0x7F, 0x50, 0x00};
+  auto colb = rgba8{0xFF, 0x7F, 0x50, 0x00};
+  auto colc = rgba8{0xFF, 0x7F, 0x50, 0x00};
+  auto cold = rgba8{0, 0, 0, 0};
 
   REQUIRE(cola == cola);
   REQUIRE(cola == colb);
