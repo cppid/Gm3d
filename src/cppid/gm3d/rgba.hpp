@@ -20,9 +20,9 @@ public:
 
   using detail::basic_rgba<rgba<std::uint8_t>, std::uint8_t>::basic_rgba;
 
-  rgba() noexcept = default;
+  constexpr rgba() noexcept = default;
 
-  rgba(scalar_type r, scalar_type g, scalar_type b) noexcept
+  constexpr rgba(scalar_type r, scalar_type g, scalar_type b) noexcept
   : rgba{r, g, b, 0xFF}
   {
   }

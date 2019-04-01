@@ -16,29 +16,29 @@ template<typename T>
 struct mat4 {
   T m[16];
 
-  mat4() noexcept = default;
+  constexpr mat4() noexcept = default;
 
-  explicit mat4(T s) noexcept
+  explicit constexpr mat4(T s) noexcept
   : mat4{s, 0, 0, 0, 0, s, 0, 0, 0, 0, s, 0, 0, 0, 0, s}
   {
   }
 
-  mat4(T m00,
-       T m01,
-       T m02,
-       T m03,
-       T m10,
-       T m11,
-       T m12,
-       T m13,
-       T m20,
-       T m21,
-       T m22,
-       T m23,
-       T m30,
-       T m31,
-       T m32,
-       T m33) noexcept
+  constexpr mat4(T m00,
+                 T m01,
+                 T m02,
+                 T m03,
+                 T m10,
+                 T m11,
+                 T m12,
+                 T m13,
+                 T m20,
+                 T m21,
+                 T m22,
+                 T m23,
+                 T m30,
+                 T m31,
+                 T m32,
+                 T m33) noexcept
   : m{m00,
       m01,
       m02,
@@ -61,7 +61,7 @@ struct mat4 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             !std::is_convertible_v<U, T>>* = nullptr>
-  explicit mat4(const mat4<U>& m) noexcept
+  explicit constexpr mat4(const mat4<U>& m) noexcept
   : mat4(m.m[0],
          m.m[1],
          m.m[2],
@@ -84,7 +84,7 @@ struct mat4 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             std::is_convertible_v<U, T>>* = nullptr>
-  explicit mat4(const mat4<U>& m) noexcept
+  explicit constexpr mat4(const mat4<U>& m) noexcept
   : mat4(m.m[0],
          m.m[1],
          m.m[2],
@@ -104,7 +104,7 @@ struct mat4 {
   {
   }
 
-  auto operator*=(const mat4& m4) noexcept -> mat4&
+  constexpr auto operator*=(const mat4& m4) noexcept -> mat4&
   {
     const auto m00 = m[0], m01 = m[1], m02 = m[2], m03 = m[3], m10 = m[4],
                m11 = m[5], m12 = m[6], m13 = m[7], m20 = m[8], m21 = m[9],
@@ -136,12 +136,12 @@ struct mat4 {
     return *this;
   }
 
-  auto operator*(const mat4& m4) const noexcept -> mat4
+  constexpr auto operator*(const mat4& m4) const noexcept -> mat4
   {
     return mat4{*this} *= m4;
   }
 
-  auto operator*=(T s) noexcept -> mat4&
+  constexpr auto operator*=(T s) noexcept -> mat4&
   {
     m[0] *= s;
     m[1] *= s;
@@ -163,182 +163,182 @@ struct mat4 {
     return *this;
   }
 
-  auto operator*(T s) const noexcept -> mat4
+  constexpr auto operator*(T s) const noexcept -> mat4
   {
     return mat4{*this} *= s;
   }
 
-  void m00(T val) noexcept
+  constexpr void m00(T val) noexcept
   {
     m[0] = val;
   }
 
-  void m01(T val) noexcept
+  constexpr void m01(T val) noexcept
   {
     m[1] = val;
   }
 
-  void m02(T val) noexcept
+  constexpr void m02(T val) noexcept
   {
     m[2] = val;
   }
 
-  void m03(T val) noexcept
+  constexpr void m03(T val) noexcept
   {
     m[3] = val;
   }
 
-  void m10(T val) noexcept
+  constexpr void m10(T val) noexcept
   {
     m[4] = val;
   }
 
-  void m11(T val) noexcept
+  constexpr void m11(T val) noexcept
   {
     m[5] = val;
   }
 
-  void m12(T val) noexcept
+  constexpr void m12(T val) noexcept
   {
     m[6] = val;
   }
 
-  void m13(T val) noexcept
+  constexpr void m13(T val) noexcept
   {
     m[7] = val;
   }
 
-  void m20(T val) noexcept
+  constexpr void m20(T val) noexcept
   {
     m[8] = val;
   }
 
-  void m21(T val) noexcept
+  constexpr void m21(T val) noexcept
   {
     m[9] = val;
   }
 
-  void m22(T val) noexcept
+  constexpr void m22(T val) noexcept
   {
     m[10] = val;
   }
 
-  void m23(T val) noexcept
+  constexpr void m23(T val) noexcept
   {
     m[11] = val;
   }
 
-  void m30(T val) noexcept
+  constexpr void m30(T val) noexcept
   {
     m[12] = val;
   }
 
-  void m31(T val) noexcept
+  constexpr void m31(T val) noexcept
   {
     m[13] = val;
   }
 
-  void m32(T val) noexcept
+  constexpr void m32(T val) noexcept
   {
     m[14] = val;
   }
 
-  void m33(T val) noexcept
+  constexpr void m33(T val) noexcept
   {
     m[15] = val;
   }
 
-  auto m00() const noexcept -> T
+  constexpr auto m00() const noexcept -> T
   {
     return m[0];
   }
 
-  auto m01() const noexcept -> T
+  constexpr auto m01() const noexcept -> T
   {
     return m[1];
   }
 
-  auto m02() const noexcept -> T
+  constexpr auto m02() const noexcept -> T
   {
     return m[2];
   }
 
-  auto m03() const noexcept -> T
+  constexpr auto m03() const noexcept -> T
   {
     return m[3];
   }
 
-  auto m10() const noexcept -> T
+  constexpr auto m10() const noexcept -> T
   {
     return m[4];
   }
 
-  auto m11() const noexcept -> T
+  constexpr auto m11() const noexcept -> T
   {
     return m[5];
   }
 
-  auto m12() const noexcept -> T
+  constexpr auto m12() const noexcept -> T
   {
     return m[6];
   }
 
-  auto m13() const noexcept -> T
+  constexpr auto m13() const noexcept -> T
   {
     return m[7];
   }
 
-  auto m20() const noexcept -> T
+  constexpr auto m20() const noexcept -> T
   {
     return m[8];
   }
 
-  auto m21() const noexcept -> T
+  constexpr auto m21() const noexcept -> T
   {
     return m[9];
   }
 
-  auto m22() const noexcept -> T
+  constexpr auto m22() const noexcept -> T
   {
     return m[10];
   }
 
-  auto m23() const noexcept -> T
+  constexpr auto m23() const noexcept -> T
   {
     return m[11];
   }
 
-  auto m30() const noexcept -> T
+  constexpr auto m30() const noexcept -> T
   {
     return m[12];
   }
 
-  auto m31() const noexcept -> T
+  constexpr auto m31() const noexcept -> T
   {
     return m[13];
   }
 
-  auto m32() const noexcept -> T
+  constexpr auto m32() const noexcept -> T
   {
     return m[14];
   }
 
-  auto m33() const noexcept -> T
+  constexpr auto m33() const noexcept -> T
   {
     return m[15];
   }
 
-  auto scale(T s) noexcept -> mat4&
+  constexpr auto scale(T s) noexcept -> mat4&
   {
     return scale(s, s, s);
   }
 
-  auto scale(const vector_3d<T>& v) noexcept -> mat4&
+  constexpr auto scale(const vector_3d<T>& v) noexcept -> mat4&
   {
     return scale(v.x(), v.y(), v.z());
   }
 
-  auto scale(T x, T y, T z) noexcept -> mat4&
+  constexpr auto scale(T x, T y, T z) noexcept -> mat4&
   {
     m[0] *= x;
     m[5] *= y;
@@ -346,19 +346,19 @@ struct mat4 {
     return *this;
   }
 
-  auto identity() noexcept -> mat4&
+  constexpr auto identity() noexcept -> mat4&
   {
     boost::qvm::set_identity(*this);
     return *this;
   }
 
-  auto rotate(const vector_3d<T>& origin, T a) noexcept -> mat4&
+  constexpr auto rotate(const vector_3d<T>& origin, T a) noexcept -> mat4&
   {
     boost::qvm::rotate(*this, origin, a);
     return *this;
   }
 
-  auto translate(T x, T y, T z) noexcept -> mat4&
+  constexpr auto translate(T x, T y, T z) noexcept -> mat4&
   {
     const auto m03 = m[3];
     const auto m13 = m[7];
@@ -383,12 +383,12 @@ struct mat4 {
     return *this;
   }
 
-  auto translate(const vector_3d<T>& v) noexcept -> mat4&
+  constexpr auto translate(const vector_3d<T>& v) noexcept -> mat4&
   {
     return translate(v.x(), v.y(), v.z());
   }
 
-  auto frustum(T l, T r, T b, T t, T n, T f) noexcept -> mat4&
+  constexpr auto frustum(T l, T r, T b, T t, T n, T f) noexcept -> mat4&
   {
     m[0] = 2 * n / (r - l);
     m[5] = 2 * n / (t - b);
@@ -408,7 +408,7 @@ struct mat4 {
     return *this;
   }
 
-  auto orthogonal(T l, T r, T b, T t, T n, T f) noexcept -> mat4&
+  constexpr auto orthogonal(T l, T r, T b, T t, T n, T f) noexcept -> mat4&
   {
     m[0] = 2 / (r - l);
     m[5] = 2 / (t - b);
@@ -423,8 +423,8 @@ struct mat4 {
     return *this;
   }
 
-  auto lookat(T ex, T ey, T ez, T lx, T ly, T lz, T ux, T uy, T uz) noexcept
-   -> mat4&
+  constexpr auto
+  lookat(T ex, T ey, T ez, T lx, T ly, T lz, T ux, T uy, T uz) noexcept -> mat4&
   {
     auto fx = ex - lx;
     auto fy = ey - ly;
@@ -469,28 +469,29 @@ struct mat4 {
     return *this;
   }
 
-  auto lookat(vector_3d<T> e, vector_3d<T> l, vector_3d<T> u) noexcept -> mat4&
+  constexpr auto lookat(vector_3d<T> e, vector_3d<T> l, vector_3d<T> u) noexcept
+   -> mat4&
   {
     return lookat(
      e.x(), e.y(), e.z(), l.x(), l.y(), l.z(), u.x(), u.y(), u.z());
   }
 
-  auto perspective(T fov, T a, T n, T f) noexcept -> mat4&
+  constexpr auto perspective(T fov, T a, T n, T f) noexcept -> mat4&
   {
     return *this = boost::qvm::perspective_rh(fov, a, n, f);
   }
 
-  auto is_invertible() const noexcept -> bool
+  constexpr auto is_invertible() const noexcept -> bool
   {
     return determinant() != T{0};
   }
 
-  auto inverse() noexcept -> mat4&
+  constexpr auto inverse() noexcept -> mat4&
   {
     return *this = boost::qvm::inverse(*this);
   }
 
-  auto transpose() noexcept -> mat4&
+  constexpr auto transpose() noexcept -> mat4&
   {
     *this = {m[0],
              m[4],
@@ -528,25 +529,29 @@ struct mat_traits<cppid::gm3d::mat4<T>> {
   static int const cols = 4;
 
   template<int Row, int Col>
-  static scalar_type read_element(cppid::gm3d::mat4<scalar_type> const& x)
+  static constexpr auto read_element(cppid::gm3d::mat4<scalar_type> const& x)
+   -> scalar_type
   {
     return x.m[Row * 4 + Col];
   }
 
   template<int Row, int Col>
-  static scalar_type& write_element(cppid::gm3d::mat4<scalar_type>& x)
+  static constexpr auto write_element(cppid::gm3d::mat4<scalar_type>& x)
+   -> scalar_type&
   {
     return x.m[Row * 4 + Col];
   }
 
-  static scalar_type
+  static constexpr auto
   read_element_idx(int row, int col, cppid::gm3d::mat4<scalar_type> const& x)
+   -> scalar_type
   {
     return x.m[row * 4 + col];
   }
 
-  static scalar_type&
+  static constexpr auto
   write_element_idx(int row, int col, cppid::gm3d::mat4<scalar_type>& x)
+   -> scalar_type
   {
     return x.m[row * 4 + col];
   }

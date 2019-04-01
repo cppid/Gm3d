@@ -8,22 +8,22 @@ class basic_rgba {
 public:
   using scalar_type = T;
 
-  basic_rgba() noexcept = default;
+  constexpr basic_rgba() noexcept = default;
 
-  explicit basic_rgba(scalar_type s) noexcept
+  explicit constexpr basic_rgba(scalar_type s) noexcept
   : basic_rgba{s, s, s, s}
   {
   }
 
-  basic_rgba(scalar_type s, scalar_type a) noexcept
+  constexpr basic_rgba(scalar_type s, scalar_type a) noexcept
   : basic_rgba{s, s, s, a}
   {
   }
 
-  basic_rgba(scalar_type r,
-             scalar_type g,
-             scalar_type b,
-             scalar_type a) noexcept
+  constexpr basic_rgba(scalar_type r,
+                       scalar_type g,
+                       scalar_type b,
+                       scalar_type a) noexcept
   : r_{r}
   , g_{g}
   , b_{b}
@@ -31,55 +31,55 @@ public:
   {
   }
 
-  void r(scalar_type val) noexcept
+  constexpr void r(scalar_type val) noexcept
   {
     r_ = val;
   }
 
-  void g(scalar_type val) noexcept
+  constexpr void g(scalar_type val) noexcept
   {
     g_ = val;
   }
 
-  void b(scalar_type val) noexcept
+  constexpr void b(scalar_type val) noexcept
   {
     b_ = val;
   }
 
-  void a(scalar_type val) noexcept
+  constexpr void a(scalar_type val) noexcept
   {
     a_ = val;
   }
 
-  auto r() const noexcept -> scalar_type
+  constexpr auto r() const noexcept -> scalar_type
   {
     return r_;
   }
 
-  auto g() const noexcept -> scalar_type
+  constexpr auto g() const noexcept -> scalar_type
   {
     return g_;
   }
 
-  auto b() const noexcept -> scalar_type
+  constexpr auto b() const noexcept -> scalar_type
   {
     return b_;
   }
 
-  auto a() const noexcept -> scalar_type
+  constexpr auto a() const noexcept -> scalar_type
   {
     return a_;
   }
 
-  friend auto operator==(const basic_rgba& lhs, const basic_rgba& rhs) noexcept
-   -> bool
+  friend constexpr auto operator==(const basic_rgba& lhs,
+                                   const basic_rgba& rhs) noexcept -> bool
   {
     return lhs.r() == rhs.r() && lhs.g() == rhs.g() && lhs.b() == rhs.b() &&
            lhs.a() == rhs.a();
   }
 
-  friend auto operator!=(const basic_rgba& lhs, const basic_rgba& rhs) noexcept
-   -> bool
+  friend constexpr auto operator!=(const basic_rgba& lhs,
+                                   const basic_rgba& rhs) noexcept -> bool
   {
     return !(lhs == rhs);
   }

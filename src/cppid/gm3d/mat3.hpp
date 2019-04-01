@@ -11,14 +11,15 @@ template<typename T>
 struct mat3 {
   T m[9];
 
-  mat3() noexcept = default;
+  constexpr mat3() noexcept = default;
 
-  explicit mat3(T s) noexcept
+  explicit constexpr mat3(T s) noexcept
   : mat3{s, 0, 0, 0, s, 0, 0, 0, s}
   {
   }
 
-  mat3(T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22) noexcept
+  constexpr mat3(
+   T m00, T m01, T m02, T m10, T m11, T m12, T m20, T m21, T m22) noexcept
   : m{m00, m01, m02, m10, m11, m12, m20, m21, m22}
   {
   }
@@ -26,7 +27,7 @@ struct mat3 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             !std::is_convertible_v<U, T>>* = nullptr>
-  explicit mat3(const mat4<U>& m4) noexcept
+  explicit constexpr mat3(const mat4<U>& m4) noexcept
   : mat3(m4.m[0],
          m4.m[1],
          m4.m[2],
@@ -58,7 +59,7 @@ struct mat3 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             !std::is_convertible_v<U, T>>* = nullptr>
-  explicit mat3(const mat3<U>& m3) noexcept
+  explicit constexpr mat3(const mat3<U>& m3) noexcept
   : mat3(m3.m[0],
          m3.m[1],
          m3.m[2],
@@ -74,7 +75,7 @@ struct mat3 {
   template<typename U,
            std::enable_if_t<std::is_constructible_v<T, U> &&
                             std::is_convertible_v<U, T>>* = nullptr>
-  mat3(const mat3<U>& m3) noexcept
+  constexpr mat3(const mat3<U>& m3) noexcept
   : mat3(m3.m[0],
          m3.m[1],
          m3.m[2],
@@ -87,92 +88,92 @@ struct mat3 {
   {
   }
 
-  void m00(T val) noexcept
+  constexpr void m00(T val) noexcept
   {
     m[0] = val;
   }
 
-  void m01(T val) noexcept
+  constexpr void m01(T val) noexcept
   {
     m[1] = val;
   }
 
-  void m02(T val) noexcept
+  constexpr void m02(T val) noexcept
   {
     m[2] = val;
   }
 
-  void m10(T val) noexcept
+  constexpr void m10(T val) noexcept
   {
     m[3] = val;
   }
 
-  void m11(T val) noexcept
+  constexpr void m11(T val) noexcept
   {
     m[4] = val;
   }
 
-  void m12(T val) noexcept
+  constexpr void m12(T val) noexcept
   {
     m[5] = val;
   }
 
-  void m20(T val) noexcept
+  constexpr void m20(T val) noexcept
   {
     m[6] = val;
   }
 
-  void m21(T val) noexcept
+  constexpr void m21(T val) noexcept
   {
     m[7] = val;
   }
 
-  void m22(T val) noexcept
+  constexpr void m22(T val) noexcept
   {
     m[8] = val;
   }
 
-  auto m00() const noexcept -> T
+  constexpr auto m00() const noexcept -> T
   {
     return m[0];
   }
 
-  auto m01() const noexcept -> T
+  constexpr auto m01() const noexcept -> T
   {
     return m[1];
   }
 
-  auto m02() const noexcept -> T
+  constexpr auto m02() const noexcept -> T
   {
     return m[2];
   }
 
-  auto m10() const noexcept -> T
+  constexpr auto m10() const noexcept -> T
   {
     return m[3];
   }
 
-  auto m11() const noexcept -> T
+  constexpr auto m11() const noexcept -> T
   {
     return m[4];
   }
 
-  auto m12() const noexcept -> T
+  constexpr auto m12() const noexcept -> T
   {
     return m[5];
   }
 
-  auto m20() const noexcept -> T
+  constexpr auto m20() const noexcept -> T
   {
     return m[6];
   }
 
-  auto m21() const noexcept -> T
+  constexpr auto m21() const noexcept -> T
   {
     return m[7];
   }
 
-  auto m22() const noexcept -> T
+  constexpr auto m22() const noexcept -> T
   {
     return m[8];
   }
@@ -189,25 +190,29 @@ struct mat_traits<cppid::gm3d::mat3<T>> {
   static int const cols = 3;
 
   template<int Row, int Col>
-  static scalar_type read_element(cppid::gm3d::mat3<scalar_type> const& x)
+  static constexpr auto read_element(cppid::gm3d::mat3<scalar_type> const& x)
+   -> scalar_type
   {
     return x.m[Row * 3 + Col];
   }
 
   template<int Row, int Col>
-  static scalar_type& write_element(cppid::gm3d::mat3<scalar_type>& x)
+  static constexpr auto write_element(cppid::gm3d::mat3<scalar_type>& x)
+   -> scalar_type&
   {
     return x.m[Row * 3 + Col];
   }
 
-  static scalar_type
+  static constexpr auto
   read_element_idx(int row, int col, cppid::gm3d::mat3<scalar_type> const& x)
+   -> scalar_type
   {
     return x.m[row * 3 + col];
   }
 
-  static scalar_type&
+  static constexpr auto
   write_element_idx(int row, int col, cppid::gm3d::mat3<scalar_type>& x)
+   -> scalar_type&
   {
     return x.m[row * 3 + col];
   }
