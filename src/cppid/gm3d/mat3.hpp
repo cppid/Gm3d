@@ -1,5 +1,5 @@
-#ifndef MOLPHENE_M3D_MAT3_HPP
-#define MOLPHENE_M3D_MAT3_HPP
+#ifndef CPPID_GM3D_MAT3_HPP
+#define CPPID_GM3D_MAT3_HPP
 
 #include <boost/qvm/all.hpp>
 
