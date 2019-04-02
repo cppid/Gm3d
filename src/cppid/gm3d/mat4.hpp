@@ -1,5 +1,5 @@
-#ifndef MOLPHENE_GFXM_MAT4_HPP
-#define MOLPHENE_GFXM_MAT4_HPP
+#ifndef CPPID_GM3D_MAT4_HPP
+#define CPPID_GM3D_MAT4_HPP
 
 #include <cmath>
 #include <type_traits>
