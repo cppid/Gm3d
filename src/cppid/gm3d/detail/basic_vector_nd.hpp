@@ -177,6 +177,14 @@ struct basic_vector_nd
     return val;
   }
 
+  // friend constexpr auto operator+(const basic_vector_nd& lhs,
+  //                                 const basic_vector_nd& rhs) noexcept
+  //  -> basic_vector_nd
+  // {
+  //   return invoke_op{}(
+  //    std::plus{}, lhs, rhs, std::make_index_sequence<dimensions>());
+  // }
+
   template<typename U,
            typename =
             std::enable_if_t<std::is_invocable_v<std::plus<>, scalar_type, U>>>
@@ -210,6 +218,14 @@ struct basic_vector_nd
      std::negate{}, lhs, std::make_index_sequence<dimensions>());
   }
 
+  friend constexpr auto operator-(const basic_vector_nd& lhs,
+                                  const basic_vector_nd& rhs) noexcept
+   -> basic_vector_nd
+  {
+    return invoke_op{}(
+     std::minus{}, lhs, rhs, std::make_index_sequence<dimensions>());
+  }
+
   template<typename U,
            typename =
             std::enable_if_t<std::is_invocable_v<std::minus<>, scalar_type, U>>>
@@ -236,6 +252,14 @@ struct basic_vector_nd
     return basic_vector_nd{lhs} - rhs;
   }
 
+  friend constexpr auto operator*(const basic_vector_nd& lhs,
+                                  const basic_vector_nd& rhs) noexcept
+   -> basic_vector_nd
+  {
+    return invoke_op{}(
+     std::multiplies{}, lhs, rhs, std::make_index_sequence<dimensions>());
+  }
+
   template<typename U,
            typename = std::enable_if_t<
             std::is_invocable_v<std::multiplies<>, scalar_type, U>>>
@@ -260,6 +284,14 @@ struct basic_vector_nd
    -> basic_vector_nd
   {
     return basic_vector_nd{lhs} * rhs;
+  }
+
+  friend constexpr auto operator/(const basic_vector_nd& lhs,
+                                  const basic_vector_nd& rhs) noexcept
+   -> basic_vector_nd
+  {
+    return invoke_op{}(
+     std::divides{}, lhs, rhs, std::make_index_sequence<dimensions>());
   }
 
   template<typename U,
