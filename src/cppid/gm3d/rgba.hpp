@@ -20,8 +20,6 @@ public:
 
   using detail::basic_rgba<rgba<std::uint8_t>, std::uint8_t>::basic_rgba;
 
-  constexpr rgba() noexcept = default;
-
   constexpr rgba(scalar_type r, scalar_type g, scalar_type b) noexcept
   : rgba{r, g, b, 0xFF}
   {
@@ -35,18 +33,16 @@ public:
 
   using detail::basic_rgba<rgba<float>, float>::basic_rgba;
 
-  rgba() noexcept = default;
-
   template<typename T,
            typename = std::enable_if_t<std::is_same_v<T, std::uint8_t>>>
-  explicit rgba(const rgba<T>& col)
+  explicit constexpr rgba(const rgba<T>& col)
   : rgba{col.r(), col.g(), col.b(), col.a()}
   {
   }
 
   template<typename T,
            typename = std::enable_if_t<std::is_same_v<T, std::uint8_t>>>
-  rgba(T r, T g, T b, T a) noexcept
+  constexpr rgba(T r, T g, T b, T a) noexcept
   : rgba{r / scalar_type{255} * a / scalar_type{255},
          g / scalar_type{255} * a / scalar_type{255},
          b / scalar_type{255} * a / scalar_type{255},
@@ -54,7 +50,7 @@ public:
   {
   }
 
-  rgba(scalar_type r, scalar_type g, scalar_type b) noexcept
+  constexpr rgba(scalar_type r, scalar_type g, scalar_type b) noexcept
   : rgba{r, g, b, 1}
   {
   }
